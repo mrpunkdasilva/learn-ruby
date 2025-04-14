@@ -1,17 +1,17 @@
 # Ruby: Seu Portal para o Submundo Digital 
 
 ```ascii
-                                                    
-     ██▀███   █    ██  ▄▄▄▄ ▓██   ██▓
-    ▓██ ▒ ██▒ ██  ▓██▒▓█████�▒██  ██▒
-    ▓██ ░▄█ ▒▓██  ▒██░▒██▒ ▄██▒██ ██░
-    ▒██▀▀█▄  ▓▓█  ░██░▒██░█▀  ░ ▐██▓░
-    ░██▓ ▒██▒▒▒█████▓ ░▓█  ▀█▓░ ██▒▓░
-    ░ ▒▓ ░▒▓░░▒▓▒ ▒ ▒ ░▒▓███▀▒ ██▒▒▒ 
-      ░▒ ░ ▒░░░▒░ ░ ░ ▒░▒   ░▓██ ░▒░ 
-      ░░   ░  ░░░ ░ ░  ░    ░▒ ▒ ░░  
-       ░        ░      ░     ░ ░     
-                            ░░ ░     
+8888888b.         888              
+888   Y88b        888              
+888    888        888              
+888   d88P888  88888888b. 888  888 
+8888888P" 888  888888 "88b888  888 
+888 T88b  888  888888  888888  888 
+888  T88b Y88b 888888 d88PY88b 888 
+888   T88b "Y8888888888P"  "Y88888 
+                               888 
+                          Y8b d88P 
+                           "Y88P"    
 ```
 
 > "Em um mundo onde código é lei, Ruby é a arma do rebelde elegante." 
@@ -78,6 +78,7 @@ Prepare seu ambiente de desenvolvimento no [Primeiros Passos](first-steps.md). E
 </seealso>
 
 ```ascii
+              
               /\
              /  \
             /    \

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE terms SYSTEM "https://resources.jetbrains.com/writerside/1.0/glossary.dtd">
+<terms>
+    <term name="ActiveRecord">Framework ORM do Ruby on Rails que conecta objetos Ruby a tabelas do banco de dados.</term>
+    
+    <term name="Block">Chunk de código que pode ser passado para métodos como argumento, geralmente delimitado por do...end ou chaves {}.</term>
+    
+    <term name="Bundler">Gerenciador de dependências para Ruby que garante que as gems necessárias estejam instaladas e compatíveis.</term>
+    
+    <term name="Duck Typing">Princípio onde o tipo de um objeto é determinado pelos métodos que ele responde, não por sua classe.</term>
+    
+    <term name="Enumerable">Module que fornece métodos para iteração e busca em coleções.</term>
+    
+    <term name="Gem">Biblioteca ou plugin Ruby empacotado que pode ser instalado e reutilizado em diferentes projetos.</term>
+    
+    <term name="IRB">Interactive Ruby Shell - console interativo para experimentar código Ruby em tempo real.</term>
+    
+    <term name="Lambda">Tipo especial de Proc que verifica estritamente o número de argumentos.</term>
+    
+    <term name="Mixin">Técnica de incluir módulos em classes para adicionar funcionalidades.</term>
+    
+    <term name="Proc">Objeto que encapsula um bloco de código para execução posterior.</term>
+    
+    <term name="RSpec">Framework de teste BDD (Behavior Driven Development) popular em Ruby.</term>
+    
+    <term name="RubyGems">Sistema de gerenciamento de pacotes padrão do Ruby.</term>
+    
+    <term name="Symbol">Objeto imutável frequentemente usado como identificador, precedido por :.</term>
+    
+    <term name="Thread">Unidade de execução que permite processamento concorrente em Ruby.</term>
+    
+    <term name="YAML">Formato de serialização de dados frequentemente usado em configurações Ruby.</term>
+    
+    <term name="Yield">Palavra-chave para executar um bloco passado para um método.</term>
+</terms>

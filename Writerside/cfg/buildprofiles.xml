@@ -9,7 +9,7 @@
         <custom-favicons>logo-primary.svg</custom-favicons>
         <product-web-url>https://punkdomus.dev/ruby</product-web-url>
         <download-title>Baixar PDF</download-title>
-        <download-page>https://punkdomus.dev/ruby/download</download-page>
+        <download-page>https://github.com/mrpunkdasilva/learn-ruby/blob/main/pdfSourceLR.pdf</download-page>
         <showDownloadButton>true</showDownloadButton>
     </variables>
     <build-profile instance="lr">

@@ -65,11 +65,6 @@ cd learn-ruby
 # Instale os plugins necessários
 ```
 
-3. Configure as variáveis de ambiente:
-```bash
-cp .env.example .env
-# Edite .env com suas configurações
-```
 
 ## 🔧 Desenvolvimento
 

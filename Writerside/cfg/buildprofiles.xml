@@ -17,7 +17,6 @@
             <noindex-content>true</noindex-content>
             <primary-color>strawberry</primary-color>
             <custom-css>custom.css</custom-css>
-            <analytics-head-script-file>analytics.js</analytics-head-script-file>
             <feedback-widget>true</feedback-widget>
             <feedback-url>https://github.com/mrpunkdasilva/learn-ruby/issues/new</feedback-url>
             <algolia-id>YOUR_ALGOLIA_ID</algolia-id>

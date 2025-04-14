@@ -3259,3 +3259,2443 @@ end
 
 
 
+# Blocos e Iteradores em Ruby
+
+Blocos e iteradores são conceitos fundamentais em Ruby que permitem escrever código mais elegante e reutilizável.
+
+## Blocos
+
+### Sintaxe Básica
+
+```RUBY
+# Sintaxe com chaves (uma linha)
+[1, 2, 3].each { |numero| puts numero }
+
+# Sintaxe do/end (múltiplas linhas)
+[1, 2, 3].each do |numero|
+  dobro = numero * 2
+  puts "O dobro de #{numero} é #{dobro}"
+end
+```
+
+### Yield
+
+```RUBY
+# Método que aceita um bloco
+def executar_tres_vezes
+  yield
+  yield
+  yield
+end
+
+executar_tres_vezes { puts "Ruby!" }
+
+# Yield com parâmetros
+def processar_item(item)
+  puts "Iniciando processamento..."
+  yield(item) if block_given?
+  puts "Processamento finalizado."
+end
+
+processar_item("dados") { |x| puts "Processando #{x}..." }
+```
+
+### Blocos como Objetos
+
+```RUBY
+# Convertendo bloco em Proc
+multiplicador = Proc.new { |x| x * 2 }
+puts multiplicador.call(5)  # => 10
+
+# Lambda
+dobrar = ->(x) { x * 2 }
+puts dobrar.call(5)        # => 10
+
+# Diferenças entre Proc e Lambda
+def retorno_proc
+  proc = Proc.new { return "Dentro do Proc" }
+  proc.call
+  "Depois do Proc"
+end
+
+def retorno_lambda
+  lambda = -> { return "Dentro do Lambda" }
+  lambda.call
+  "Depois do Lambda"
+end
+```
+
+## Iteradores
+
+### Iteradores Básicos
+
+```RUBY
+# each
+[1, 2, 3].each { |n| puts n }
+
+# map/collect
+numeros = [1, 2, 3]
+dobrados = numeros.map { |n| n * 2 }  # => [2, 4, 6]
+
+# select/find_all
+pares = (1..10).select { |n| n.even? }  # => [2, 4, 6, 8, 10]
+
+# reject
+impares = (1..10).reject { |n| n.even? }  # => [1, 3, 5, 7, 9]
+```
+
+### Iteradores Avançados
+
+```RUBY
+# reduce/inject
+soma = [1, 2, 3, 4].reduce(0) { |acc, n| acc + n }  # => 10
+
+# each_with_index
+["a", "b", "c"].each_with_index do |letra, index|
+  puts "#{index}: #{letra}"
+end
+
+# each_with_object
+hash = ["a", "b", "c"].each_with_object({}) do |item, hash|
+  hash[item] = item.upcase
+end
+```
+
+## Implementando Iteradores Personalizados
+
+```RUBY
+class Fibonacci
+  include Enumerable
+  
+  def initialize(max)
+    @max = max
+  end
+  
+  def each
+    return enum_for(:each) unless block_given?
+    
+    a, b = 1, 1
+    while a <= @max
+      yield a
+      a, b = b, a + b
+    end
+  end
+end
+
+# Uso
+fib = Fibonacci.new(100)
+fib.each { |n| print "#{n} " }  # => 1 1 2 3 5 8 13 21 34 55 89
+```
+
+## Exemplos Práticos
+
+### Processamento de Arquivos
+
+```RUBY
+def processar_arquivo(nome_arquivo)
+  File.open(nome_arquivo) do |file|
+    file.each_line do |linha|
+      next if linha.strip.empty?
+      yield linha if block_given?
+    end
+  end
+end
+
+processar_arquivo("dados.txt") do |linha|
+  puts "Processando: #{linha}"
+end
+```
+
+### Transações em Banco de Dados
+
+```RUBY
+def with_transaction
+  begin
+    iniciar_transacao
+    yield
+    commit_transacao
+  rescue
+    rollback_transacao
+    raise
+  end
+end
+
+with_transaction do
+  # operações no banco de dados
+  criar_usuario(dados)
+  atualizar_perfil(perfil)
+end
+```
+
+## Boas Práticas
+
+```RUBY
+# Use &block para passar blocos como último parâmetro
+def meu_metodo(opcoes = {}, &block)
+  # configuração inicial
+  block.call if block
+end
+
+# Verifique se um bloco foi fornecido
+def metodo_com_bloco
+  return "Nenhum bloco fornecido" unless block_given?
+  yield
+end
+
+# Prefira map a each quando transformar dados
+# Ruim
+numeros = []
+[1, 2, 3].each { |n| numeros << n * 2 }
+
+# Melhor
+numeros = [1, 2, 3].map { |n| n * 2 }
+```
+
+## Padrões Comuns
+
+### Builder Pattern
+
+```RUBY
+class RelatorioBuilder
+  def initialize
+    @relatorio = Relatorio.new
+  end
+  
+  def build
+    yield(self)
+    @relatorio
+  end
+  
+  def adicionar_titulo(titulo)
+    @relatorio.titulo = titulo
+    self
+  end
+  
+  def adicionar_conteudo(conteudo)
+    @relatorio.conteudo = conteudo
+    self
+  end
+end
+
+relatorio = RelatorioBuilder.new.build do |b|
+  b.adicionar_titulo("Relatório Mensal")
+   .adicionar_conteudo("Dados do mês...")
+end
+```
+
+## See also
+
+[Documentação do Enumerable](https://ruby-doc.org/core/Enumerable.html)
+[Documentação de Proc](https://ruby-doc.org/core/Proc.html)
+
+
+
+# Conceitos Básicos de Blocos
+
+Os blocos são uma das características mais poderosas e fundamentais do Ruby. Eles representam trechos de código que podem ser passados para métodos como argumentos.
+
+## Sintaxe de Blocos
+
+### Duas Formas de Escrever
+
+```RUBY
+# Usando chaves {} (recomendado para blocos de uma linha)
+[1, 2, 3].each { |numero| puts numero }
+
+# Usando do...end (recomendado para múltiplas linhas)
+[1, 2, 3].each do |numero|
+  dobro = numero * 2
+  puts "O dobro de #{numero} é #{dobro}"
+end
+```
+
+### Parâmetros de Bloco
+
+```RUBY
+# Bloco sem parâmetros
+3.times { puts "Olá!" }
+
+# Bloco com um parâmetro
+["a", "b", "c"].each { |letra| puts letra }
+
+# Bloco com múltiplos parâmetros
+hash = {nome: "Ruby", versao: "3.2"}
+hash.each { |chave, valor| puts "#{chave}: #{valor}" }
+```
+
+## Métodos que Aceitam Blocos
+
+### Yield
+
+```RUBY
+# Método simples com yield
+def saudacao
+  puts "Antes do bloco"
+  yield
+  puts "Depois do bloco"
+end
+
+saudacao { puts "Dentro do bloco!" }
+
+# Yield com parâmetros
+def repetir(quantidade)
+  quantidade.times do |i|
+    yield i
+  end
+end
+
+repetir(3) { |n| puts "Repetição #{n}" }
+```
+
+### Verificando Blocos
+
+```RUBY
+# Usando block_given?
+def executar
+  if block_given?
+    puts "Executando o bloco:"
+    yield
+  else
+    puts "Nenhum bloco fornecido"
+  end
+end
+
+executar { puts "Olá!" }
+executar  # Sem bloco
+```
+
+## Escopo e Variáveis
+
+### Variáveis Locais
+
+```RUBY
+# Blocos podem acessar variáveis externas
+valor = 10
+[1, 2, 3].each do |numero|
+  soma = numero + valor
+  puts soma
+end
+
+# Variáveis de bloco não vazam para fora
+[1, 2, 3].each do |numero|
+  temp = numero * 2
+end
+# puts temp  # Isso geraria um erro
+```
+
+### Variáveis de Bloco
+
+```RUBY
+# Parâmetros de bloco são locais ao bloco
+total = 0
+[1, 2, 3].each do |numero|
+  total += numero
+end
+puts total  # => 6
+```
+
+## Exemplos Práticos
+
+### Manipulação de Arquivos
+
+```RUBY
+# Lendo um arquivo
+def ler_arquivo(nome)
+  File.open(nome, "r") do |arquivo|
+    while linha = arquivo.gets
+      yield linha if block_given?
+    end
+  end
+end
+
+ler_arquivo("dados.txt") do |linha|
+  puts "Lendo: #{linha.chomp}"
+end
+```
+
+### Temporizador Simples
+
+```RUBY
+def medir_tempo
+  inicio = Time.now
+  yield
+  fim = Time.now
+  puts "Tempo decorrido: #{fim - inicio} segundos"
+end
+
+medir_tempo do
+  # código a ser medido
+  sleep(1)
+end
+```
+
+## Boas Práticas
+
+```RUBY
+# Use {} para blocos de uma linha
+[1, 2, 3].map { |n| n * 2 }
+
+# Use do...end para blocos multilinhas
+[1, 2, 3].map do |n|
+  dobro = n * 2
+  dobro + 1
+end
+
+# Seja consistente com os nomes dos parâmetros
+["ruby", "python"].each { |linguagem| puts linguagem }
+
+# Evite blocos muito grandes
+# Prefira extrair para métodos quando o bloco ficar complexo
+def processar_dados(dados)
+  dados.map { |item| transformar(item) }
+end
+
+def transformar(item)
+  # lógica complexa aqui
+end
+```
+
+## Exercícios Comuns
+
+```RUBY
+# 1. Implementar um método que aceita um bloco
+def repetir_mensagem
+  yield if block_given?
+end
+
+# 2. Passar parâmetros para o bloco
+def processar_lista(lista)
+  lista.each { |item| yield item }
+end
+
+# 3. Combinar blocos com condicionais
+def executar_se_valido(valor)
+  if valor > 0
+    yield valor
+  else
+    puts "Valor inválido"
+  end
+end
+```
+
+## See also
+
+[Documentação de Proc](https://ruby-doc.org/core/Proc.html)
+[Documentação de block_given?](https://ruby-doc.org/core/Kernel.html#method-i-block_given-3F)
+
+
+
+# Iteradores em Ruby
+
+Os iteradores são métodos que permitem percorrer coleções de elementos de forma elegante e eficiente.
+
+## Iteradores Básicos
+
+### each
+
+```RUBY
+# Iterando sobre um array
+[1, 2, 3].each do |numero|
+  puts "Número: #{numero}"
+end
+
+# Iterando sobre um hash
+{nome: "Ruby", tipo: "Linguagem"}.each do |chave, valor|
+  puts "#{chave}: #{valor}"
+end
+```
+
+### times
+
+```RUBY
+# Executando um bloco n vezes
+5.times do |i|
+  puts "Iteração #{i}"
+end
+
+# Versão compacta
+3.times { puts "Ruby!" }
+```
+
+### upto e downto
+
+```RUBY
+# Contagem crescente
+1.upto(5) do |n|
+  puts "Contando até #{n}"
+end
+
+# Contagem regressiva
+5.downto(1) do |n|
+  puts "Contagem regressiva: #{n}"
+end
+```
+
+## Iteradores de Transformação
+
+### map/collect
+
+```RUBY
+# Transformando elementos
+numeros = [1, 2, 3, 4, 5]
+dobrados = numeros.map { |n| n * 2 }
+puts dobrados  # => [2, 4, 6, 8, 10]
+
+# Com múltiplas linhas
+maiusculas = ["a", "b", "c"].map do |letra|
+  letra.upcase
+end
+```
+
+### select/find_all e reject
+
+```RUBY
+# Filtrando elementos
+numeros = (1..10).to_a
+pares = numeros.select { |n| n.even? }
+impares = numeros.reject { |n| n.even? }
+
+# Com condições mais complexas
+palavras = ["ruby", "python", "java", "javascript"]
+longas = palavras.select do |palavra|
+  palavra.length > 4
+end
+```
+
+## Iteradores Especializados
+
+### each_with_index
+
+```RUBY
+# Acesso ao índice durante iteração
+frutas = ["maçã", "banana", "laranja"]
+frutas.each_with_index do |fruta, indice|
+  puts "#{indice + 1}. #{fruta}"
+end
+```
+
+### each_with_object
+
+```RUBY
+# Construindo um novo objeto durante iteração
+resultado = ["a", "b", "c"].each_with_object({}) do |letra, hash|
+  hash[letra] = letra.upcase
+end
+puts resultado  # => {"a"=>"A", "b"=>"B", "c"=>"C"}
+```
+
+### inject/reduce
+
+```RUBY
+# Acumulando valores
+soma = [1, 2, 3, 4, 5].inject(0) { |acc, n| acc + n }
+puts soma  # => 15
+
+# Exemplo com strings
+palavras = ["ruby", "é", "incrível"]
+frase = palavras.inject("") do |resultado, palavra|
+  "#{resultado} #{palavra}".strip
+end
+```
+
+## Iteradores de Enumeráveis
+
+### any? e all?
+
+```RUBY
+# Verificando condições
+numeros = [2, 4, 6, 8]
+todos_pares = numeros.all? { |n| n.even? }  # => true
+algum_maior_que_cinco = numeros.any? { |n| n > 5 }  # => true
+```
+
+### find/detect
+
+```RUBY
+# Encontrando o primeiro elemento que satisfaz uma condição
+primeiro_maior_que_cinco = (1..10).find { |n| n > 5 }
+puts primeiro_maior_que_cinco  # => 6
+```
+
+## Exemplos Práticos
+
+### Processamento de Dados
+
+```RUBY
+class Produto
+  attr_reader :nome, :preco
+  
+  def initialize(nome, preco)
+    @nome = nome
+    @preco = preco
+  end
+end
+
+produtos = [
+  Produto.new("Laptop", 5000),
+  Produto.new("Mouse", 100),
+  Produto.new("Teclado", 300)
+]
+
+# Filtrando produtos caros
+caros = produtos.select { |p| p.preco > 1000 }
+
+# Calculando valor total
+total = produtos.inject(0) { |soma, p| soma + p.preco }
+```
+
+### Manipulação de Arquivos
+
+```RUBY
+def processar_linhas(arquivo)
+  File.readlines(arquivo).each_with_index do |linha, numero|
+    yield linha.chomp, numero + 1 if block_given?
+  end
+end
+
+processar_linhas("log.txt") do |conteudo, linha|
+  puts "Linha #{linha}: #{conteudo}"
+end
+```
+
+## Boas Práticas
+
+```RUBY
+# Prefira map a each para transformações
+# Ruim
+resultados = []
+numeros.each { |n| resultados << n * 2 }
+
+# Melhor
+resultados = numeros.map { |n| n * 2 }
+
+# Use o iterador mais específico para sua necessidade
+# Ruim
+encontrado = nil
+numeros.each do |n|
+  if n > 5
+    encontrado = n
+    break
+  end
+end
+
+# Melhor
+encontrado = numeros.find { |n| n > 5 }
+```
+
+## See also
+
+[Documentação do Enumerable](https://ruby-doc.org/core/Enumerable.html)
+[Documentação de Array](https://ruby-doc.org/core/Array.html)
+
+
+
+# Enumerators em Ruby
+
+Enumerators são objetos que encapsulam a lógica de iteração, permitindo um controle mais fino sobre o processo de enumeração.
+
+## Conceitos Básicos
+
+### Criando Enumerators
+
+```RUBY
+# Usando to_enum
+array = [1, 2, 3]
+enum = array.to_enum
+puts enum.next  # => 1
+puts enum.next  # => 2
+
+# Usando enum_for
+hash = { a: 1, b: 2 }
+enum = hash.enum_for(:each)
+puts enum.next  # => [:a, 1]
+```
+
+### Enumerator como Iterador Externo
+
+```RUBY
+# Controle manual da iteração
+letras = ['a', 'b', 'c'].to_enum
+begin
+  loop do
+    puts letras.next
+  end
+rescue StopIteration
+  puts "Iteração completa!"
+end
+```
+
+## Métodos Comuns
+
+### each_with_index
+
+```RUBY
+# Criando enumerator com índice
+enum = %w[primeiro segundo terceiro].each_with_index
+puts enum.next  # => ["primeiro", 0]
+puts enum.next  # => ["segundo", 1]
+```
+
+### with_index
+
+```RUBY
+# Personalizando o índice inicial
+enum = %w[a b c].each
+enum.with_index(1) do |letra, indice|
+  puts "#{indice}: #{letra}"
+end
+```
+
+## Enumerators Especializados
+
+### Infinite Sequences
+
+```RUBY
+# Gerando sequência infinita
+naturais = Enumerator.new do |y|
+  n = 0
+  loop do
+    y << n
+    n += 1
+  end
+end
+
+puts naturais.take(5)  # => [0, 1, 2, 3, 4]
+```
+
+### Lazy Enumerators
+
+```RUBY
+# Processamento preguiçoso
+infinitos = (1..Float::INFINITY).lazy
+pares = infinitos.select(&:even?)
+puts pares.take(5).force  # => [2, 4, 6, 8, 10]
+```
+
+## Casos de Uso Práticos
+
+### Processamento de Grandes Arquivos
+
+```RUBY
+def ler_arquivo_lazy(arquivo)
+  Enumerator.new do |yielder|
+    File.open(arquivo) do |file|
+      file.each_line do |linha|
+        yielder << linha.chomp
+      end
+    end
+  end
+end
+
+leitor = ler_arquivo_lazy("dados.txt")
+puts leitor.take(3)  # Lê apenas as 3 primeiras linhas
+```
+
+### Paginação
+
+```RUBY
+class Paginador
+  def initialize(colecao, por_pagina)
+    @colecao = colecao
+    @por_pagina = por_pagina
+  end
+
+  def paginas
+    Enumerator.new do |yielder|
+      atual = @colecao
+      until atual.empty?
+        yielder << atual.take(@por_pagina)
+        atual = atual.drop(@por_pagina)
+      end
+    end
+  end
+end
+
+dados = (1..10).to_a
+paginador = Paginador.new(dados, 3)
+paginador.paginas.each { |pagina| p pagina }
+```
+
+## Combinando Enumerators
+
+### Zip e Chain
+
+```RUBY
+# Combinando sequências
+letras = %w[a b c].to_enum
+numeros = [1, 2, 3].to_enum
+
+combinados = letras.zip(numeros)
+puts combinados.to_a  # => [["a", 1], ["b", 2], ["c", 3]]
+```
+
+## Boas Práticas
+
+```RUBY
+# Use Enumerator quando precisar de controle fino
+def processar_em_lotes(colecao, tamanho)
+  colecao.each_slice(tamanho).with_index do |lote, indice|
+    puts "Processando lote #{indice + 1}"
+    lote.each { |item| yield item }
+  end
+end
+
+# Use lazy para coleções potencialmente infinitas
+def numeros_primos
+  Enumerator.new do |yielder|
+    n = 2
+    loop do
+      yielder << n if primo?(n)
+      n += 1
+    end
+  end.lazy
+end
+```
+
+## See also
+
+[Documentação de Enumerator](https://ruby-doc.org/core/Enumerator.html)
+[Documentação de Enumerator::Lazy](https://ruby-doc.org/core/Enumerator/Lazy.html)
+
+
+
+# Closures em Ruby
+
+Closures são blocos de código que podem capturar e carregar consigo o contexto onde foram definidos.
+
+## Conceitos Básicos
+
+### O que são Closures
+
+```RUBY
+# Exemplo básico de closure
+def criar_contador
+  count = 0
+  return -> { count += 1 }
+end
+
+contador = criar_contador
+puts contador.call  # => 1
+puts contador.call  # => 2
+```
+
+### Tipos de Closures em Ruby
+
+```RUBY
+# Blocks
+def executar
+  yield if block_given?
+end
+
+# Procs
+soma = Proc.new { |a, b| a + b }
+
+# Lambdas
+multiplicar = ->(a, b) { a * b }
+```
+
+## Diferenças entre Proc e Lambda
+
+### Verificação de Argumentos
+
+```RUBY
+# Lambda é mais estrito com argumentos
+lambda_exemplo = ->(x, y) { x + y }
+proc_exemplo = Proc.new { |x, y| x + y }
+
+lambda_exemplo.call(1)      # ArgumentError
+proc_exemplo.call(1)        # Retorna nil para y
+```
+
+### Comportamento do return
+
+```RUBY
+def teste_lambda
+  lambda = -> { return "lambda" }
+  lambda.call
+  return "método"
+end
+
+def teste_proc
+  proc = Proc.new { return "proc" }
+  proc.call
+  return "método"
+end
+
+puts teste_lambda  # => "método"
+puts teste_proc    # => "proc"
+```
+
+## Contexto e Escopo
+
+### Capturando Variáveis
+
+```RUBY
+def criar_saudacao(nome)
+  saudacao = "Olá"
+  -> { "#{saudacao}, #{nome}!" }
+end
+
+saudar = criar_saudacao("Ruby")
+puts saudar.call  # => "Olá, Ruby!"
+```
+
+### Múltiplos Contextos
+
+```RUBY
+def criar_multiplicador(fator)
+  -> (numero) { numero * fator }
+end
+
+dobrar = criar_multiplicador(2)
+triplicar = criar_multiplicador(3)
+
+puts dobrar.call(5)     # => 10
+puts triplicar.call(5)  # => 15
+```
+
+## Casos de Uso Práticos
+
+### Callbacks
+
+```RUBY
+class Button
+  def initialize
+    @callbacks = []
+  end
+
+  def on_click(&block)
+    @callbacks << block
+  end
+
+  def click
+    @callbacks.each { |callback| callback.call }
+  end
+end
+
+botao = Button.new
+botao.on_click { puts "Clicado!" }
+botao.click  # => "Clicado!"
+```
+
+### Memoização
+
+```RUBY
+def memoize
+  cache = {}
+  ->(arg) do
+    unless cache.has_key?(arg)
+      cache[arg] = yield(arg)
+    end
+    cache[arg]
+  end
+end
+
+calcular = memoize { |n| n * 2 }
+puts calcular.call(5)  # Calcula
+puts calcular.call(5)  # Usa cache
+```
+
+## Padrões de Design com Closures
+
+### Decorador
+
+```RUBY
+def decorar_logger(metodo)
+  -> (*args) do
+    puts "Chamando método com #{args}"
+    resultado = metodo.call(*args)
+    puts "Resultado: #{resultado}"
+    resultado
+  end
+end
+
+calculo = ->(x, y) { x + y }
+com_log = decorar_logger(calculo)
+com_log.call(2, 3)
+```
+
+### Currying
+
+```RUBY
+def curry_exemplo
+  ->(x) do
+    ->(y) do
+      ->(z) { x + y + z }
+    end
+  end
+end
+
+soma = curry_exemplo
+puts soma.call(1).call(2).call(3)  # => 6
+```
+
+## Boas Práticas
+
+```RUBY
+# Use lambdas para comportamentos reutilizáveis
+validar = ->(valor) { valor.to_s.strip.length > 0 }
+["", "ruby", " "].select(&validar)
+
+# Evite closures muito complexos
+# Prefira extrair para classes quando a lógica crescer
+class Calculadora
+  def initialize(operacao)
+    @operacao = operacao
+  end
+
+  def calcular(x, y)
+    @operacao.call(x, y)
+  end
+end
+```
+
+## See also
+
+[Documentação de Proc](https://ruby-doc.org/core/Proc.html)
+[Documentação de Method](https://ruby-doc.org/core/Method.html)
+
+
+
+# Programação Orientada a Objetos em Ruby
+
+## Fundamentos
+
+Em Ruby, tudo é um objeto. Esta não é apenas uma frase de efeito - é um princípio fundamental da linguagem.
+
+### O Básico dos Objetos
+
+```RUBY
+# Até números são objetos
+42.class          # => Integer
+42.methods.sort   # Lista todos os métodos disponíveis
+
+# Strings também são objetos
+"ruby".upcase     # => "RUBY"
+"ruby".reverse    # => "ybur"
+```
+
+## Os Quatro Pilares da OOP
+
+### 1. Encapsulamento
+
+```RUBY
+class ContaBancaria
+  def initialize(saldo_inicial)
+    @saldo = saldo_inicial
+  end
+
+  def depositar(valor)
+    @saldo += valor
+  end
+
+  private
+
+  def validar_saldo
+    @saldo > 0
+  end
+end
+```
+
+### 2. Herança
+
+```RUBY
+class Animal
+  def falar
+    "Som genérico"
+  end
+end
+
+class Cachorro < Animal
+  def falar
+    "Au au!"
+  end
+end
+```
+
+### 3. Polimorfismo
+
+```RUBY
+class Ave
+  def voar
+    "Voando..."
+  end
+end
+
+class Pinguim < Ave
+  def voar
+    "Desculpe, não posso voar"
+  end
+end
+
+def fazer_voar(ave)
+  ave.voar
+end
+```
+
+### 4. Abstração
+
+```RUBY
+class Veiculo
+  def iniciar
+    ligar_motor
+    verificar_sistemas
+    liberar_freios
+  end
+
+  private
+
+  def ligar_motor
+    # Implementação específica
+  end
+
+  def verificar_sistemas
+    # Implementação específica
+  end
+end
+```
+
+## Características Únicas em Ruby
+
+### Duck Typing
+
+```RUBY
+def processar(objeto)
+  if objeto.respond_to?(:calcular)
+    objeto.calcular
+  else
+    "Objeto não suporta cálculo"
+  end
+end
+```
+
+### Mixins com Modules
+
+```RUBY
+module Nadador
+  def nadar
+    "Nadando..."
+  end
+end
+
+class Pato
+  include Nadador
+end
+
+pato = Pato.new
+pato.nadar  # => "Nadando..."
+```
+
+### Open Classes
+
+```RUBY
+class String
+  def palindromo?
+    self.downcase == self.downcase.reverse
+  end
+end
+
+"ovo".palindromo?  # => true
+```
+
+## Boas Práticas
+
+### SOLID em Ruby
+
+```RUBY
+# Single Responsibility Principle
+class RelatorioFinanceiro
+  def gerar
+    dados = coletar_dados
+    formatar(dados)
+  end
+
+  private
+
+  def coletar_dados
+    # Lógica de coleta
+  end
+
+  def formatar(dados)
+    # Lógica de formatação
+  end
+end
+```
+
+### Composição vs Herança
+
+```RUBY
+# Preferir composição
+class Carro
+  def initialize
+    @motor = Motor.new
+    @transmissao = Transmissao.new
+  end
+
+  def ligar
+    @motor.ligar
+    @transmissao.engatar
+  end
+end
+```
+
+## Padrões de Design Comuns
+
+### Factory Method
+
+```RUBY
+class DocumentoFactory
+  def self.criar(tipo)
+    case tipo
+    when :pdf
+      PDFDocument.new
+    when :doc
+      WordDocument.new
+    else
+      raise "Tipo de documento desconhecido"
+    end
+  end
+end
+```
+
+### Singleton
+
+```RUBY
+require 'singleton'
+
+class Logger
+  include Singleton
+  
+  def log(msg)
+    puts "[LOG] #{msg}"
+  end
+end
+
+Logger.instance.log("Mensagem")
+```
+
+## Dicas e Truques
+
+### Method Missing
+
+```RUBY
+class Tradutor
+  def method_missing(nome_metodo, *args)
+    palavra = nome_metodo.to_s
+    if palavra.start_with?("traduzir_")
+      "Tradução de: #{palavra.sub('traduzir_', '')}"
+    else
+      super
+    end
+  end
+end
+```
+
+### Reflexão
+
+```RUBY
+class Exemplo
+  def initialize
+    @variavel = 42
+  end
+
+  def listar_metodos
+    methods - Object.methods
+  end
+
+  def listar_variaveis
+    instance_variables
+  end
+end
+```
+
+## Recursos Avançados
+
+### Metaprogramação Básica
+
+```RUBY
+class Dinamico
+  def self.criar_metodo(nome)
+    define_method(nome) do |arg|
+      "Método #{nome} chamado com #{arg}"
+    end
+  end
+end
+
+Dinamico.criar_metodo(:teste)
+```
+
+### Delegação
+
+```RUBY
+require 'forwardable'
+
+class Playlist
+  extend Forwardable
+  def_delegators :@songs, :<<, :first, :last
+
+  def initialize
+    @songs = []
+  end
+end
+```
+
+## See also
+
+[Documentação de Object](https://ruby-doc.org/core/Object.html)
+[Documentação de Module](https://ruby-doc.org/core/Module.html)
+[Documentação de Class](https://ruby-doc.org/core/Class.html)
+
+
+
+# Classes e Objetos em Ruby
+
+## Definindo Classes
+
+Uma classe é um modelo para criar objetos. Em Ruby, classes são definidas usando a palavra-chave `class`.
+
+```RUBY
+class Pessoa
+  def initialize(nome, idade)
+    @nome = nome
+    @idade = idade
+  end
+
+  def apresentar
+    "Olá, me chamo #{@nome} e tenho #{@idade} anos"
+  end
+end
+
+# Criando um objeto
+pessoa = Pessoa.new("Ana", 25)
+puts pessoa.apresentar  # => "Olá, me chamo Ana e tenho 25 anos"
+```
+
+## Atributos
+
+### Variáveis de Instância
+
+```RUBY
+class Conta
+  def initialize(saldo)
+    @saldo = saldo  # Variável de instância
+  end
+end
+```
+
+### Getters e Setters
+
+```RUBY
+class Pessoa
+  # Forma manual
+  def nome
+    @nome
+  end
+
+  def nome=(novo_nome)
+    @nome = novo_nome
+  end
+
+  # Forma automática usando attr_*
+  attr_reader :idade     # Getter
+  attr_writer :email     # Setter
+  attr_accessor :telefone  # Getter e Setter
+end
+```
+
+## Métodos
+
+### Métodos de Instância
+
+```RUBY
+class Calculadora
+  def somar(a, b)
+    a + b
+  end
+
+  def subtrair(a, b)
+    a - b
+  end
+end
+
+calc = Calculadora.new
+puts calc.somar(5, 3)  # => 8
+```
+
+### Métodos de Classe
+
+```RUBY
+class Tempo
+  def self.agora
+    Time.now
+  end
+
+  class << self
+    def amanha
+      Time.now + 86400
+    end
+  end
+end
+
+puts Tempo.agora    # Imprime o tempo atual
+puts Tempo.amanha   # Imprime o tempo de amanhã
+```
+
+## Construtores
+
+```RUBY
+class Produto
+  def initialize(nome, preco)
+    @nome = nome
+    @preco = preco
+    @criado_em = Time.now
+  end
+
+  # Construtor alternativo
+  def self.from_hash(hash)
+    new(hash[:nome], hash[:preco])
+  end
+end
+
+# Diferentes formas de criar objetos
+produto1 = Produto.new("Livro", 29.90)
+produto2 = Produto.from_hash({ nome: "Caneta", preco: 4.50 })
+```
+
+## Visibilidade de Métodos
+
+```RUBY
+class Documento
+  def publico
+    "Qualquer um pode me chamar"
+  end
+
+  protected
+
+  def protegido
+    "Apenas classes relacionadas podem me chamar"
+  end
+
+  private
+
+  def privado
+    "Apenas métodos internos podem me chamar"
+  end
+end
+```
+
+## Métodos Predicados
+
+```RUBY
+class Pessoa
+  def initialize(idade)
+    @idade = idade
+  end
+
+  def maior_de_idade?
+    @idade >= 18
+  end
+
+  def aposentado?
+    @idade >= 65
+  end
+end
+
+pessoa = Pessoa.new(30)
+puts pessoa.maior_de_idade?  # => true
+puts pessoa.aposentado?      # => false
+```
+
+## Comparação de Objetos
+
+```RUBY
+class Ponto
+  attr_reader :x, :y
+
+  def initialize(x, y)
+    @x = x
+    @y = y
+  end
+
+  def ==(outro)
+    x == outro.x && y == outro.y
+  end
+
+  def eql?(outro)
+    self == outro
+  end
+
+  def hash
+    [x, y].hash
+  end
+end
+```
+
+## Objetos Singleton
+
+```RUBY
+class Configuracao
+  @instancia = nil
+
+  def self.instancia
+    @instancia ||= new
+  end
+
+  private_class_method :new
+end
+```
+
+## Métodos Especiais
+
+```RUBY
+class Pessoa
+  def initialize(nome)
+    @nome = nome
+  end
+
+  def to_s
+    "Pessoa: #{@nome}"
+  end
+
+  def inspect
+    "#<Pessoa:#{object_id} @nome='#{@nome}'>"
+  end
+
+  def respond_to_missing?(metodo, include_private = false)
+    metodo.to_s.start_with?('falar_') || super
+  end
+
+  def method_missing(metodo, *args)
+    if metodo.to_s.start_with?('falar_')
+      "#{@nome} está falando #{metodo.to_s.sub('falar_', '')}"
+    else
+      super
+    end
+  end
+end
+```
+
+## Boas Práticas
+
+```RUBY
+class Usuario
+  # Use attr_reader ao invés de attr_accessor quando possível
+  attr_reader :nome, :email
+
+  # Valide dados no initialize
+  def initialize(nome, email)
+    raise ArgumentError, "Nome não pode ser vazio" if nome.nil? || nome.empty?
+    raise ArgumentError, "Email inválido" unless email.include?('@')
+    
+    @nome = nome
+    @email = email
+  end
+
+  # Prefira métodos pequenos e focados
+  def nome_completo
+    "#{@nome} #{@sobrenome}"
+  end
+
+  # Use métodos predicados apropriadamente
+  def valido?
+    nome_valido? && email_valido?
+  end
+
+  private
+
+  def nome_valido?
+    @nome.length >= 2
+  end
+
+  def email_valido?
+    @email.include?('@') && @email.include?('.')
+  end
+end
+```
+
+## See also
+
+[Documentação de Class](https://ruby-doc.org/core/Class.html)
+[Documentação de Object](https://ruby-doc.org/core/Object.html)
+
+
+
+# Herança em Ruby
+
+## Conceitos Básicos
+
+A herança é um dos pilares fundamentais da programação orientada a objetos. Em Ruby, uma classe pode herdar características de apenas uma classe pai (herança simples).
+
+```RUBY
+class Animal
+  def initialize(nome)
+    @nome = nome
+  end
+
+  def falar
+    "Som genérico"
+  end
+end
+
+class Cachorro < Animal
+  def falar
+    "Au au!"
+  end
+end
+
+rex = Cachorro.new("Rex")
+puts rex.falar  # => "Au au!"
+```
+
+## Super
+
+### Usando super com initialize
+
+```RUBY
+class Veiculo
+  def initialize(marca)
+    @marca = marca
+  end
+end
+
+class Carro < Veiculo
+  def initialize(marca, modelo)
+    super(marca)
+    @modelo = modelo
+  end
+end
+
+fusca = Carro.new("VW", "Fusca")
+```
+
+### Super sem Parênteses
+
+```RUBY
+class Animal
+  def dormir
+    "ZzZzZz..."
+  end
+end
+
+class Gato < Animal
+  def dormir
+    super + " Miau..."
+  end
+end
+```
+
+## Hierarquia de Classes
+
+### Verificando a Hierarquia
+
+```RUBY
+class A; end
+class B < A; end
+class C < B; end
+
+puts C.ancestors  # => [C, B, A, Object, Kernel, BasicObject]
+puts C.superclass # => B
+```
+
+### is_a? e kind_of?
+
+```RUBY
+gato = Gato.new
+puts gato.is_a?(Gato)     # => true
+puts gato.is_a?(Animal)   # => true
+puts gato.kind_of?(Object) # => true
+```
+
+## Métodos e Visibilidade
+
+### Sobrescrevendo Métodos
+
+```RUBY
+class Pessoa
+  def apresentar
+    "Olá, sou uma pessoa"
+  end
+end
+
+class Funcionario < Pessoa
+  def apresentar
+    "#{super} e trabalho aqui"
+  end
+end
+```
+
+### Visibilidade na Herança
+
+```RUBY
+class Animal
+  protected
+  def protegido
+    "Método protegido"
+  end
+
+  private
+  def privado
+    "Método privado"
+  end
+end
+
+class Cachorro < Animal
+  def chamar_protegido
+    protegido  # OK
+  end
+
+  def chamar_privado
+    privado    # OK
+  end
+end
+```
+
+## Herança e Composição
+
+### Quando Usar Cada Uma
+
+```RUBY
+# Herança - "é um"
+class Ave
+  def voar
+    "Voando..."
+  end
+end
+
+class Papagaio < Ave
+  def falar
+    "Olá!"
+  end
+end
+
+# Composição - "tem um"
+class Motor
+  def ligar
+    "Motor ligado"
+  end
+end
+
+class Carro
+  def initialize
+    @motor = Motor.new
+  end
+
+  def ligar
+    @motor.ligar
+  end
+end
+```
+
+## Abstract e Interface
+
+### Simulando Classes Abstratas
+
+```RUBY
+class Animal
+  def falar
+    raise NotImplementedError, "#{self.class} precisa implementar o método 'falar'"
+  end
+end
+
+class Cachorro < Animal
+  def falar
+    "Au au!"
+  end
+end
+```
+
+### Simulando Interfaces
+
+```RUBY
+module Nadador
+  def nadar
+    raise NotImplementedError
+  end
+end
+
+class Peixe
+  include Nadador
+  
+  def nadar
+    "Nadando como um peixe"
+  end
+end
+```
+
+## Boas Práticas
+
+### Princípio de Substituição de Liskov
+
+```RUBY
+class Retangulo
+  def initialize(largura, altura)
+    @largura = largura
+    @altura = altura
+  end
+
+  def area
+    @largura * @altura
+  end
+end
+
+class Quadrado < Retangulo
+  def initialize(lado)
+    super(lado, lado)
+  end
+end
+```
+
+### Evitando Herança Profunda
+
+```RUBY
+# Evite isso
+class A; end
+class B < A; end
+class C < B; end
+class D < C; end  # Muito profundo!
+
+# Prefira composição
+class D
+  def initialize
+    @b = B.new
+    @c = C.new
+  end
+end
+```
+
+## Padrões Comuns
+
+### Template Method
+
+```RUBY
+class Relatorio
+  def gerar
+    coletar_dados
+    processar_dados
+    formatar_saida
+  end
+
+  private
+
+  def coletar_dados
+    raise NotImplementedError
+  end
+
+  def processar_dados
+    raise NotImplementedError
+  end
+
+  def formatar_saida
+    raise NotImplementedError
+  end
+end
+
+class RelatorioVendas < Relatorio
+  private
+
+  def coletar_dados
+    # Implementação específica
+  end
+
+  def processar_dados
+    # Implementação específica
+  end
+
+  def formatar_saida
+    # Implementação específica
+  end
+end
+```
+
+### Factory Method
+
+```RUBY
+class Animal
+  def self.criar(tipo)
+    case tipo
+    when :cachorro
+      Cachorro.new
+    when :gato
+      Gato.new
+    else
+      raise "Tipo de animal desconhecido"
+    end
+  end
+end
+```
+
+## See also
+
+[Documentação de Class#superclass](https://ruby-doc.org/core/Class.html#method-i-superclass)
+[Documentação de Module#ancestors](https://ruby-doc.org/core/Module.html#method-i-ancestors)
+
+
+
+# Encapsulamento em Ruby
+
+## Conceitos Básicos
+
+O encapsulamento é um dos princípios fundamentais da programação orientada a objetos, que consiste em esconder os detalhes internos de implementação e fornecer uma interface pública para interação com o objeto.
+
+### Variáveis de Instância
+
+```RUBY
+class ContaBancaria
+  def initialize(saldo_inicial)
+    @saldo = saldo_inicial  # Variável de instância privada
+  end
+
+  def consultar_saldo
+    @saldo
+  end
+
+  def depositar(valor)
+    @saldo += valor if valor > 0
+  end
+end
+
+conta = ContaBancaria.new(1000)
+puts conta.consultar_saldo  # => 1000
+```
+
+## Níveis de Acesso
+
+### Public
+
+```RUBY
+class Produto
+  def initialize(nome, preco)
+    @nome = nome
+    @preco = preco
+  end
+
+  # Métodos públicos por padrão
+  def descricao
+    "#{@nome} - R$ #{@preco}"
+  end
+end
+```
+
+### Protected
+
+```RUBY
+class Funcionario
+  def initialize(salario)
+    @salario = salario
+  end
+
+  def compara_salario(outro_funcionario)
+    @salario > outro_funcionario.salario_protegido
+  end
+
+  protected
+
+  def salario_protegido
+    @salario
+  end
+end
+```
+
+### Private
+
+```RUBY
+class Processador
+  def executar
+    preparar
+    processar
+    finalizar
+  end
+
+  private
+
+  def preparar
+    # Lógica interna
+  end
+
+  def processar
+    # Lógica interna
+  end
+
+  def finalizar
+    # Lógica interna
+  end
+end
+```
+
+## Getters e Setters
+
+### Métodos Tradicionais
+
+```RUBY
+class Pessoa
+  def initialize(nome)
+    @nome = nome
+  end
+
+  # Getter
+  def nome
+    @nome
+  end
+
+  # Setter
+  def nome=(novo_nome)
+    @nome = novo_nome
+  end
+end
+```
+
+### Usando attr_*
+
+```RUBY
+class Produto
+  # Getter e Setter
+  attr_accessor :nome, :preco
+  
+  # Apenas Getter
+  attr_reader :codigo
+  
+  # Apenas Setter
+  attr_writer :desconto
+
+  def initialize(nome, preco, codigo)
+    @nome = nome
+    @preco = preco
+    @codigo = codigo
+    @desconto = 0
+  end
+end
+```
+
+## Validações e Controle de Acesso
+
+### Validando Dados
+
+```RUBY
+class Conta
+  def initialize
+    @saldo = 0
+  end
+
+  def depositar(valor)
+    raise ArgumentError, "Valor deve ser positivo" unless valor > 0
+    @saldo += valor
+  end
+
+  def sacar(valor)
+    raise ArgumentError, "Saldo insuficiente" if valor > @saldo
+    @saldo -= valor
+  end
+end
+```
+
+### Customizando Getters e Setters
+
+```RUBY
+class Produto
+  def preco
+    @preco
+  end
+
+  def preco=(novo_preco)
+    raise "Preço inválido" if novo_preco < 0
+    @preco = novo_preco
+  end
+
+  def desconto=(valor)
+    @desconto = if valor > 0.3
+                  0.3  # Limita desconto a 30%
+                else
+                  valor
+                end
+  end
+end
+```
+
+## Padrões de Encapsulamento
+
+### Value Object
+
+```RUBY
+class Coordenada
+  attr_reader :x, :y
+
+  def initialize(x, y)
+    @x = x
+    @y = y
+  end
+
+  # Objetos imutáveis
+  def mover(dx, dy)
+    Coordenada.new(@x + dx, @y + dy)
+  end
+end
+```
+
+### Tell, Don't Ask
+
+```RUBY
+# Evite isso
+class Pedido
+  def calcular_desconto
+    if @cliente.vip?
+      @valor * 0.2
+    else
+      @valor * 0.1
+    end
+  end
+end
+
+# Prefira isso
+class Pedido
+  def calcular_desconto
+    @cliente.aplicar_desconto(@valor)
+  end
+end
+
+class Cliente
+  def aplicar_desconto(valor)
+    desconto = vip? ? 0.2 : 0.1
+    valor * desconto
+  end
+end
+```
+
+## Boas Práticas
+
+### Princípio da Responsabilidade Única
+
+```RUBY
+# Ruim
+class Usuario
+  def salvar
+    # Lógica de banco de dados
+  end
+
+  def enviar_email
+    # Lógica de envio de email
+  end
+end
+
+# Melhor
+class Usuario
+  def salvar
+    UsuarioRepository.new.salvar(self)
+  end
+end
+
+class NotificadorEmail
+  def notificar(usuario)
+    # Lógica de envio de email
+  end
+end
+```
+
+### Lei de Demeter
+
+```RUBY
+# Evite isso
+class Pedido
+  def processar
+    @cliente.carteira.conta.debitar(@valor)
+  end
+end
+
+# Prefira isso
+class Pedido
+  def processar
+    @cliente.debitar(@valor)
+  end
+end
+
+class Cliente
+  def debitar(valor)
+    @carteira.debitar(valor)
+  end
+end
+```
+
+## See also
+
+[Documentação de visibilidade de métodos](https://ruby-doc.org/core/Module.html#method-i-private)
+[Documentação de attr_accessor](https://ruby-doc.org/core/Module.html#method-i-attr_accessor)
+
+
+
+# Composição em Ruby
+
+## Conceitos Básicos
+
+A composição é um princípio de design onde objetos complexos são construídos a partir de objetos mais simples, estabelecendo uma relação "tem um" entre eles.
+
+### Composição vs Herança
+
+```RUBY
+# Herança - "é um"
+class Ave
+  def voar
+    "Voando..."
+  end
+end
+
+class Papagaio < Ave
+end
+
+# Composição - "tem um"
+class Aviao
+  def initialize
+    @motor = Motor.new
+    @asas = Asas.new
+  end
+
+  def voar
+    return "Não é possível voar" unless @motor.funcionando? && @asas.ok?
+    "Decolando..."
+  end
+end
+```
+
+## Implementando Composição
+
+### Composição Básica
+
+```RUBY
+class Carro
+  def initialize
+    @motor = Motor.new
+    @transmissao = Transmissao.new
+    @rodas = Array.new(4) { Roda.new }
+  end
+
+  def ligar
+    @motor.ligar
+    @transmissao.em_neutro
+  end
+
+  def dirigir
+    return false unless @motor.ligado?
+    @transmissao.engatar_primeira
+    true
+  end
+end
+```
+
+### Injeção de Dependências
+
+```RUBY
+class Computador
+  def initialize(processador:, memoria:, armazenamento:)
+    @processador = processador
+    @memoria = memoria
+    @armazenamento = armazenamento
+  end
+
+  def iniciar
+    @processador.ligar
+    @memoria.verificar
+    @armazenamento.montar
+  end
+end
+
+pc = Computador.new(
+  processador: Intel.new,
+  memoria: RAM.new(16),
+  armazenamento: SSD.new(512)
+)
+```
+
+## Padrões de Composição
+
+### Delegação
+
+```RUBY
+class Playlist
+  def initialize
+    @musicas = []
+    @player = AudioPlayer.new
+  end
+
+  # Delegando métodos para @player
+  def play
+    @player.play(@musicas.first)
+  end
+
+  def pause
+    @player.pause
+  end
+
+  def add_musica(musica)
+    @musicas << musica
+  end
+end
+```
+
+### Composição com Módulos
+
+```RUBY
+module Logger
+  def log(mensagem)
+    puts "[#{Time.now}] #{mensagem}"
+  end
+end
+
+class ServicoEmail
+  def initialize
+    @logger = Object.new.extend(Logger)
+  end
+
+  def enviar(email)
+    @logger.log("Enviando email para #{email}")
+    # Lógica de envio
+  end
+end
+```
+
+## Composição Flexível
+
+### Componentes Intercambiáveis
+
+```RUBY
+class Notificador
+  def initialize(servicos = [])
+    @servicos = servicos
+  end
+
+  def notificar(mensagem)
+    @servicos.each { |servico| servico.enviar(mensagem) }
+  end
+end
+
+notificador = Notificador.new([
+  EmailNotificacao.new,
+  SMSNotificacao.new,
+  SlackNotificacao.new
+])
+```
+
+### Composição Dinâmica
+
+```RUBY
+class Editor
+  def initialize
+    @plugins = {}
+  end
+
+  def adicionar_plugin(nome, plugin)
+    @plugins[nome] = plugin
+  end
+
+  def remover_plugin(nome)
+    @plugins.delete(nome)
+  end
+
+  def executar_plugin(nome, *args)
+    if @plugins[nome]
+      @plugins[nome].executar(*args)
+    end
+  end
+end
+```
+
+## Boas Práticas
+
+### Composição sobre Herança
+
+```RUBY
+# Evite herança profunda
+class Animal < SerVivo < Organismo < Entidade # Ruim
+
+# Prefira composição
+class Animal
+  def initialize
+    @metabolismo = Metabolismo.new
+    @reproducao = Reproducao.new
+    @movimento = Movimento.new
+  end
+end
+```
+
+### Interfaces Claras
+
+```RUBY
+class Relatorio
+  def initialize(formatador:, dados:)
+    @formatador = formatador
+    @dados = dados
+  end
+
+  def gerar
+    conteudo = processar_dados
+    @formatador.formatar(conteudo)
+  end
+
+  private
+
+  def processar_dados
+    @dados.map { |dado| dado.to_h }
+  end
+end
+```
+
+## Exemplos Práticos
+
+### Sistema de Pagamento
+
+```RUBY
+class ProcessadorPagamento
+  def initialize(gateway:, validador:, notificador:)
+    @gateway = gateway
+    @validador = validador
+    @notificador = notificador
+  end
+
+  def processar(pagamento)
+    return false unless @validador.validar(pagamento)
+    
+    if @gateway.cobrar(pagamento)
+      @notificador.sucesso(pagamento)
+      true
+    else
+      @notificador.falha(pagamento)
+      false
+    end
+  end
+end
+```
+
+### Gerador de Relatórios
+
+```RUBY
+class GeradorRelatorio
+  def initialize
+    @coletores = []
+    @processadores = []
+    @formatadores = []
+  end
+
+  def adicionar_coletor(coletor)
+    @coletores << coletor
+  end
+
+  def adicionar_processador(processador)
+    @processadores << processador
+  end
+
+  def adicionar_formatador(formatador)
+    @formatadores << formatador
+  end
+
+  def gerar
+    dados = @coletores.map(&:coletar).flatten
+    dados = @processadores.reduce(dados) { |acc, proc| proc.processar(acc) }
+    @formatadores.map { |fmt| fmt.formatar(dados) }
+  end
+end
+```
+
+## See also
+
+[Documentação de Modules](https://ruby-doc.org/core/Module.html)
+[Documentação de Object](https://ruby-doc.org/core/Object.html)
+
+
+

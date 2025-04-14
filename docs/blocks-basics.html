@@ -1,0 +1,152 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#E8488B"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-04-14T15:50:11.951209305"><title>Conceitos B&aacute;sicos de Blocos | Learn Ruby</title><script type="application/json" id="virtual-toc-data">[{"id":"sintaxe-de-blocos","level":0,"title":"Sintaxe de Blocos","anchor":"#sintaxe-de-blocos"},{"id":"m-todos-que-aceitam-blocos","level":0,"title":"Métodos que Aceitam Blocos","anchor":"#m-todos-que-aceitam-blocos"},{"id":"escopo-e-vari-veis","level":0,"title":"Escopo e Variáveis","anchor":"#escopo-e-vari-veis"},{"id":"exemplos-pr-ticos","level":0,"title":"Exemplos Práticos","anchor":"#exemplos-pr-ticos"},{"id":"boas-pr-ticas","level":0,"title":"Boas Práticas","anchor":"#boas-pr-ticas"},{"id":"exerc-cios-comuns","level":0,"title":"Exercícios Comuns","anchor":"#exerc-cios-comuns"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Conceitos B&aacute;sicos de Blocos | Learn Ruby"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Learn Ruby Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/blocks-basics.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Conceitos B&aacute;sicos de Blocos | Learn Ruby"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/blocks-basics.html#webpage",
+    "url": "writerside-documentation/blocks-basics.html",
+    "name": "Conceitos B&aacute;sicos de Blocos | Learn Ruby",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Ruby Help"
+}</script><!-- End Schema.org --></head><body data-id="blocks-basics" data-main-title="Conceitos Básicos de Blocos" data-article-props="{&quot;seeAlso&quot;:[{&quot;title&quot;:&quot;Miscellaneous&quot;,&quot;links&quot;:[{&quot;url&quot;:&quot;https://ruby-doc.org/core/Proc.html&quot;,&quot;text&quot;:&quot;Documentação de Proc&quot;},{&quot;url&quot;:&quot;https://ruby-doc.org/core/Kernel.html#method-i-block_given-3F&quot;,&quot;text&quot;:&quot;Documentação de block_given?&quot;}]}],&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="blocks-and-iterators.md|Blocos e Iteradores em Ruby"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Ruby  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="blocks-basics" id="blocks-basics.md">Conceitos Básicos de Blocos</h1><p id="z86ioka_3">Os blocos s&atilde;o uma das caracter&iacute;sticas mais poderosas e fundamentais do Ruby. Eles representam trechos de c&oacute;digo que podem ser passados para m&eacute;todos como argumentos.</p><section class="chapter"><h2 id="sintaxe-de-blocos" data-toc="sintaxe-de-blocos">Sintaxe de Blocos</h2><section class="chapter"><h3 id="duas-formas-de-escrever" data-toc="duas-formas-de-escrever">Duas Formas de Escrever</h3><div class="code-block" data-lang="ruby">
+# Usando chaves {} (recomendado para blocos de uma linha)
+[1, 2, 3].each { |numero| puts numero }
+
+# Usando do...end (recomendado para múltiplas linhas)
+[1, 2, 3].each do |numero|
+  dobro = numero * 2
+  puts &quot;O dobro de #{numero} é #{dobro}&quot;
+end
+</div></section><section class="chapter"><h3 id="par-metros-de-bloco" data-toc="par-metros-de-bloco">Par&acirc;metros de Bloco</h3><div class="code-block" data-lang="ruby">
+# Bloco sem parâmetros
+3.times { puts &quot;Olá!&quot; }
+
+# Bloco com um parâmetro
+[&quot;a&quot;, &quot;b&quot;, &quot;c&quot;].each { |letra| puts letra }
+
+# Bloco com múltiplos parâmetros
+hash = {nome: &quot;Ruby&quot;, versao: &quot;3.2&quot;}
+hash.each { |chave, valor| puts &quot;#{chave}: #{valor}&quot; }
+</div></section></section><section class="chapter"><h2 id="m-todos-que-aceitam-blocos" data-toc="m-todos-que-aceitam-blocos">M&eacute;todos que Aceitam Blocos</h2><section class="chapter"><h3 id="yield" data-toc="yield">Yield</h3><div class="code-block" data-lang="ruby">
+# Método simples com yield
+def saudacao
+  puts &quot;Antes do bloco&quot;
+  yield
+  puts &quot;Depois do bloco&quot;
+end
+
+saudacao { puts &quot;Dentro do bloco!&quot; }
+
+# Yield com parâmetros
+def repetir(quantidade)
+  quantidade.times do |i|
+    yield i
+  end
+end
+
+repetir(3) { |n| puts &quot;Repetição #{n}&quot; }
+</div></section><section class="chapter"><h3 id="verificando-blocos" data-toc="verificando-blocos">Verificando Blocos</h3><div class="code-block" data-lang="ruby">
+# Usando block_given?
+def executar
+  if block_given?
+    puts &quot;Executando o bloco:&quot;
+    yield
+  else
+    puts &quot;Nenhum bloco fornecido&quot;
+  end
+end
+
+executar { puts &quot;Olá!&quot; }
+executar  # Sem bloco
+</div></section></section><section class="chapter"><h2 id="escopo-e-vari-veis" data-toc="escopo-e-vari-veis">Escopo e Vari&aacute;veis</h2><section class="chapter"><h3 id="vari-veis-locais" data-toc="vari-veis-locais">Vari&aacute;veis Locais</h3><div class="code-block" data-lang="ruby">
+# Blocos podem acessar variáveis externas
+valor = 10
+[1, 2, 3].each do |numero|
+  soma = numero + valor
+  puts soma
+end
+
+# Variáveis de bloco não vazam para fora
+[1, 2, 3].each do |numero|
+  temp = numero * 2
+end
+# puts temp  # Isso geraria um erro
+</div></section><section class="chapter"><h3 id="vari-veis-de-bloco" data-toc="vari-veis-de-bloco">Vari&aacute;veis de Bloco</h3><div class="code-block" data-lang="ruby">
+# Parâmetros de bloco são locais ao bloco
+total = 0
+[1, 2, 3].each do |numero|
+  total += numero
+end
+puts total  # =&gt; 6
+</div></section></section><section class="chapter"><h2 id="exemplos-pr-ticos" data-toc="exemplos-pr-ticos">Exemplos Pr&aacute;ticos</h2><section class="chapter"><h3 id="manipula-o-de-arquivos" data-toc="manipula-o-de-arquivos">Manipula&ccedil;&atilde;o de Arquivos</h3><div class="code-block" data-lang="ruby">
+# Lendo um arquivo
+def ler_arquivo(nome)
+  File.open(nome, &quot;r&quot;) do |arquivo|
+    while linha = arquivo.gets
+      yield linha if block_given?
+    end
+  end
+end
+
+ler_arquivo(&quot;dados.txt&quot;) do |linha|
+  puts &quot;Lendo: #{linha.chomp}&quot;
+end
+</div></section><section class="chapter"><h3 id="temporizador-simples" data-toc="temporizador-simples">Temporizador Simples</h3><div class="code-block" data-lang="ruby">
+def medir_tempo
+  inicio = Time.now
+  yield
+  fim = Time.now
+  puts &quot;Tempo decorrido: #{fim - inicio} segundos&quot;
+end
+
+medir_tempo do
+  # código a ser medido
+  sleep(1)
+end
+</div></section></section><section class="chapter"><h2 id="boas-pr-ticas" data-toc="boas-pr-ticas">Boas Pr&aacute;ticas</h2><div class="code-block" data-lang="ruby">
+# Use {} para blocos de uma linha
+[1, 2, 3].map { |n| n * 2 }
+
+# Use do...end para blocos multilinhas
+[1, 2, 3].map do |n|
+  dobro = n * 2
+  dobro + 1
+end
+
+# Seja consistente com os nomes dos parâmetros
+[&quot;ruby&quot;, &quot;python&quot;].each { |linguagem| puts linguagem }
+
+# Evite blocos muito grandes
+# Prefira extrair para métodos quando o bloco ficar complexo
+def processar_dados(dados)
+  dados.map { |item| transformar(item) }
+end
+
+def transformar(item)
+  # lógica complexa aqui
+end
+</div></section><section class="chapter"><h2 id="exerc-cios-comuns" data-toc="exerc-cios-comuns">Exerc&iacute;cios Comuns</h2><div class="code-block" data-lang="ruby">
+# 1. Implementar um método que aceita um bloco
+def repetir_mensagem
+  yield if block_given?
+end
+
+# 2. Passar parâmetros para o bloco
+def processar_lista(lista)
+  lista.each { |item| yield item }
+end
+
+# 3. Combinar blocos com condicionais
+def executar_se_valido(valor)
+  if valor &gt; 0
+    yield valor
+  else
+    puts &quot;Valor inválido&quot;
+  end
+end
+</div></section><div class="last-modified">14 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="blocks-and-iterators.html" class="navigation-links__prev">Blocos e Iteradores em Ruby</a><a href="iterators.html" class="navigation-links__next">Iteradores em Ruby</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

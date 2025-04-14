@@ -1,0 +1,246 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#E8488B"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-04-14T15:50:11.951674521"><title>Heran&ccedil;a em Ruby | Learn Ruby</title><script type="application/json" id="virtual-toc-data">[{"id":"conceitos-b-sicos","level":0,"title":"Conceitos Básicos","anchor":"#conceitos-b-sicos"},{"id":"super","level":0,"title":"Super","anchor":"#super"},{"id":"hierarquia-de-classes","level":0,"title":"Hierarquia de Classes","anchor":"#hierarquia-de-classes"},{"id":"m-todos-e-visibilidade","level":0,"title":"Métodos e Visibilidade","anchor":"#m-todos-e-visibilidade"},{"id":"heran-a-e-composi-o","level":0,"title":"Herança e Composição","anchor":"#heran-a-e-composi-o"},{"id":"abstract-e-interface","level":0,"title":"Abstract e Interface","anchor":"#abstract-e-interface"},{"id":"boas-pr-ticas","level":0,"title":"Boas Práticas","anchor":"#boas-pr-ticas"},{"id":"padr-es-comuns","level":0,"title":"Padrões Comuns","anchor":"#padr-es-comuns"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Heran&ccedil;a em Ruby | Learn Ruby"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Learn Ruby Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/inheritance.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Heran&ccedil;a em Ruby | Learn Ruby"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/inheritance.html#webpage",
+    "url": "writerside-documentation/inheritance.html",
+    "name": "Heran&ccedil;a em Ruby | Learn Ruby",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Ruby Help"
+}</script><!-- End Schema.org --></head><body data-id="inheritance" data-main-title="Herança em Ruby" data-article-props="{&quot;seeAlso&quot;:[{&quot;title&quot;:&quot;Miscellaneous&quot;,&quot;links&quot;:[{&quot;url&quot;:&quot;https://ruby-doc.org/core/Class.html#method-i-superclass&quot;,&quot;text&quot;:&quot;Documentação de Class#superclass&quot;},{&quot;url&quot;:&quot;https://ruby-doc.org/core/Module.html#method-i-ancestors&quot;,&quot;text&quot;:&quot;Documentação de Module#ancestors&quot;}]}],&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="object-oriented-programming.md|Programação Orientada a Objetos em Ruby"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Ruby  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="inheritance" id="inheritance.md">Herança em Ruby</h1><section class="chapter"><h2 id="conceitos-b-sicos" data-toc="conceitos-b-sicos">Conceitos B&aacute;sicos</h2><p id="e4oiws_12">A heran&ccedil;a &eacute; um dos pilares fundamentais da programa&ccedil;&atilde;o orientada a objetos. Em Ruby, uma classe pode herdar caracter&iacute;sticas de apenas uma classe pai (heran&ccedil;a simples).</p><div class="code-block" data-lang="ruby">
+class Animal
+  def initialize(nome)
+    @nome = nome
+  end
+
+  def falar
+    &quot;Som genérico&quot;
+  end
+end
+
+class Cachorro &lt; Animal
+  def falar
+    &quot;Au au!&quot;
+  end
+end
+
+rex = Cachorro.new(&quot;Rex&quot;)
+puts rex.falar  # =&gt; &quot;Au au!&quot;
+</div></section><section class="chapter"><h2 id="super" data-toc="super">Super</h2><section class="chapter"><h3 id="usando-super-com-initialize" data-toc="usando-super-com-initialize">Usando super com initialize</h3><div class="code-block" data-lang="ruby">
+class Veiculo
+  def initialize(marca)
+    @marca = marca
+  end
+end
+
+class Carro &lt; Veiculo
+  def initialize(marca, modelo)
+    super(marca)
+    @modelo = modelo
+  end
+end
+
+fusca = Carro.new(&quot;VW&quot;, &quot;Fusca&quot;)
+</div></section><section class="chapter"><h3 id="super-sem-par-nteses" data-toc="super-sem-par-nteses">Super sem Par&ecirc;nteses</h3><div class="code-block" data-lang="ruby">
+class Animal
+  def dormir
+    &quot;ZzZzZz...&quot;
+  end
+end
+
+class Gato &lt; Animal
+  def dormir
+    super + &quot; Miau...&quot;
+  end
+end
+</div></section></section><section class="chapter"><h2 id="hierarquia-de-classes" data-toc="hierarquia-de-classes">Hierarquia de Classes</h2><section class="chapter"><h3 id="verificando-a-hierarquia" data-toc="verificando-a-hierarquia">Verificando a Hierarquia</h3><div class="code-block" data-lang="ruby">
+class A; end
+class B &lt; A; end
+class C &lt; B; end
+
+puts C.ancestors  # =&gt; [C, B, A, Object, Kernel, BasicObject]
+puts C.superclass # =&gt; B
+</div></section><section class="chapter"><h3 id="is-a-e-kind-of" data-toc="is-a-e-kind-of">is_a? e kind_of?</h3><div class="code-block" data-lang="ruby">
+gato = Gato.new
+puts gato.is_a?(Gato)     # =&gt; true
+puts gato.is_a?(Animal)   # =&gt; true
+puts gato.kind_of?(Object) # =&gt; true
+</div></section></section><section class="chapter"><h2 id="m-todos-e-visibilidade" data-toc="m-todos-e-visibilidade">M&eacute;todos e Visibilidade</h2><section class="chapter"><h3 id="sobrescrevendo-m-todos" data-toc="sobrescrevendo-m-todos">Sobrescrevendo M&eacute;todos</h3><div class="code-block" data-lang="ruby">
+class Pessoa
+  def apresentar
+    &quot;Olá, sou uma pessoa&quot;
+  end
+end
+
+class Funcionario &lt; Pessoa
+  def apresentar
+    &quot;#{super} e trabalho aqui&quot;
+  end
+end
+</div></section><section class="chapter"><h3 id="visibilidade-na-heran-a" data-toc="visibilidade-na-heran-a">Visibilidade na Heran&ccedil;a</h3><div class="code-block" data-lang="ruby">
+class Animal
+  protected
+  def protegido
+    &quot;Método protegido&quot;
+  end
+
+  private
+  def privado
+    &quot;Método privado&quot;
+  end
+end
+
+class Cachorro &lt; Animal
+  def chamar_protegido
+    protegido  # OK
+  end
+
+  def chamar_privado
+    privado    # OK
+  end
+end
+</div></section></section><section class="chapter"><h2 id="heran-a-e-composi-o" data-toc="heran-a-e-composi-o">Heran&ccedil;a e Composi&ccedil;&atilde;o</h2><section class="chapter"><h3 id="quando-usar-cada-uma" data-toc="quando-usar-cada-uma">Quando Usar Cada Uma</h3><div class="code-block" data-lang="ruby">
+# Herança - &quot;é um&quot;
+class Ave
+  def voar
+    &quot;Voando...&quot;
+  end
+end
+
+class Papagaio &lt; Ave
+  def falar
+    &quot;Olá!&quot;
+  end
+end
+
+# Composição - &quot;tem um&quot;
+class Motor
+  def ligar
+    &quot;Motor ligado&quot;
+  end
+end
+
+class Carro
+  def initialize
+    @motor = Motor.new
+  end
+
+  def ligar
+    @motor.ligar
+  end
+end
+</div></section></section><section class="chapter"><h2 id="abstract-e-interface" data-toc="abstract-e-interface">Abstract e Interface</h2><section class="chapter"><h3 id="simulando-classes-abstratas" data-toc="simulando-classes-abstratas">Simulando Classes Abstratas</h3><div class="code-block" data-lang="ruby">
+class Animal
+  def falar
+    raise NotImplementedError, &quot;#{self.class} precisa implementar o método 'falar'&quot;
+  end
+end
+
+class Cachorro &lt; Animal
+  def falar
+    &quot;Au au!&quot;
+  end
+end
+</div></section><section class="chapter"><h3 id="simulando-interfaces" data-toc="simulando-interfaces">Simulando Interfaces</h3><div class="code-block" data-lang="ruby">
+module Nadador
+  def nadar
+    raise NotImplementedError
+  end
+end
+
+class Peixe
+  include Nadador
+  
+  def nadar
+    &quot;Nadando como um peixe&quot;
+  end
+end
+</div></section></section><section class="chapter"><h2 id="boas-pr-ticas" data-toc="boas-pr-ticas">Boas Pr&aacute;ticas</h2><section class="chapter"><h3 id="princ-pio-de-substitui-o-de-liskov" data-toc="princ-pio-de-substitui-o-de-liskov">Princ&iacute;pio de Substitui&ccedil;&atilde;o de Liskov</h3><div class="code-block" data-lang="ruby">
+class Retangulo
+  def initialize(largura, altura)
+    @largura = largura
+    @altura = altura
+  end
+
+  def area
+    @largura * @altura
+  end
+end
+
+class Quadrado &lt; Retangulo
+  def initialize(lado)
+    super(lado, lado)
+  end
+end
+</div></section><section class="chapter"><h3 id="evitando-heran-a-profunda" data-toc="evitando-heran-a-profunda">Evitando Heran&ccedil;a Profunda</h3><div class="code-block" data-lang="ruby">
+# Evite isso
+class A; end
+class B &lt; A; end
+class C &lt; B; end
+class D &lt; C; end  # Muito profundo!
+
+# Prefira composição
+class D
+  def initialize
+    @b = B.new
+    @c = C.new
+  end
+end
+</div></section></section><section class="chapter"><h2 id="padr-es-comuns" data-toc="padr-es-comuns">Padr&otilde;es Comuns</h2><section class="chapter"><h3 id="template-method" data-toc="template-method">Template Method</h3><div class="code-block" data-lang="ruby">
+class Relatorio
+  def gerar
+    coletar_dados
+    processar_dados
+    formatar_saida
+  end
+
+  private
+
+  def coletar_dados
+    raise NotImplementedError
+  end
+
+  def processar_dados
+    raise NotImplementedError
+  end
+
+  def formatar_saida
+    raise NotImplementedError
+  end
+end
+
+class RelatorioVendas &lt; Relatorio
+  private
+
+  def coletar_dados
+    # Implementação específica
+  end
+
+  def processar_dados
+    # Implementação específica
+  end
+
+  def formatar_saida
+    # Implementação específica
+  end
+end
+</div></section><section class="chapter"><h3 id="factory-method" data-toc="factory-method">Factory Method</h3><div class="code-block" data-lang="ruby">
+class Animal
+  def self.criar(tipo)
+    case tipo
+    when :cachorro
+      Cachorro.new
+    when :gato
+      Gato.new
+    else
+      raise &quot;Tipo de animal desconhecido&quot;
+    end
+  end
+end
+</div></section></section><div class="last-modified">14 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="classes-and-objects.html" class="navigation-links__prev">Classes e Objetos em Ruby</a><a href="encapsulation.html" class="navigation-links__next">Encapsulamento em Ruby</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

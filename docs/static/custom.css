@@ -46,6 +46,11 @@ a:hover {
     text-decoration: underline;
 }
 
+.prompt__wrapper {
+    background: transparent;
+}
+
+
 /* Blocos de código */
 .code-block {
     background-color: var(--code-bg);
@@ -69,9 +74,6 @@ code:not(.code-block code) {
     font-size: 0.9em;
 }
 
-.prompt__wrapper.prompt__wrapper--type-tip {
-    background: transparent;
-}
 
 /* Notas e avisos */
 .note {

@@ -1,0 +1,143 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#E8488B"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-04-14T15:11:59.660549755"><title>Arrays e Hashes em Ruby | Learn Ruby</title><script type="application/json" id="virtual-toc-data">[{"id":"arrays","level":0,"title":"Arrays","anchor":"#arrays"},{"id":"hashes","level":0,"title":"Hashes","anchor":"#hashes"},{"id":"combinando-arrays-e-hashes","level":0,"title":"Combinando Arrays e Hashes","anchor":"#combinando-arrays-e-hashes"},{"id":"boas-pr-ticas","level":0,"title":"Boas Práticas","anchor":"#boas-pr-ticas"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Arrays e Hashes em Ruby | Learn Ruby"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Learn Ruby Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/arrays-and-hashes.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Arrays e Hashes em Ruby | Learn Ruby"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/arrays-and-hashes.html#webpage",
+    "url": "writerside-documentation/arrays-and-hashes.html",
+    "name": "Arrays e Hashes em Ruby | Learn Ruby",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Ruby Help"
+}</script><!-- End Schema.org --></head><body data-id="arrays-and-hashes" data-main-title="Arrays e Hashes em Ruby" data-article-props="{&quot;seeAlso&quot;:[{&quot;title&quot;:&quot;Miscellaneous&quot;,&quot;links&quot;:[{&quot;url&quot;:&quot;https://ruby-doc.org/core/Array.html&quot;,&quot;text&quot;:&quot;Documentação de Array&quot;},{&quot;url&quot;:&quot;https://ruby-doc.org/core/Hash.html&quot;,&quot;text&quot;:&quot;Documentação de Hash&quot;}]}],&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="data-types.md|Tipos de Dados em Ruby"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Ruby  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="arrays-and-hashes" id="arrays-and-hashes.md">Arrays e Hashes em Ruby</h1><p id="z1dqvep_3">Arrays e Hashes s&atilde;o estruturas de dados fundamentais em Ruby, permitindo armazenar e organizar cole&ccedil;&otilde;es de objetos.</p><section class="chapter"><h2 id="arrays" data-toc="arrays">Arrays</h2><p id="z1dqvep_9">Arrays s&atilde;o cole&ccedil;&otilde;es ordenadas de objetos que podem ser acessados por &iacute;ndice.</p><section class="chapter"><h3 id="cria-o-de-arrays" data-toc="cria-o-de-arrays">Cria&ccedil;&atilde;o de Arrays</h3><div class="code-block" data-lang="ruby">
+# Formas de criar arrays
+array_vazio = []
+numeros = [1, 2, 3, 4, 5]
+misturado = [1, &quot;dois&quot;, 3.0, true]
+array_palavras = %w[ruby python javascript]  # =&gt; [&quot;ruby&quot;, &quot;python&quot;, &quot;javascript&quot;]
+array_simbolos = %i[nome idade cidade]       # =&gt; [:nome, :idade, :cidade]
+
+# Array com construtor
+Array.new(3)        # =&gt; [nil, nil, nil]
+Array.new(3, &quot;ruby&quot;) # =&gt; [&quot;ruby&quot;, &quot;ruby&quot;, &quot;ruby&quot;]
+</div></section><section class="chapter"><h3 id="acessando-elementos" data-toc="acessando-elementos">Acessando Elementos</h3><div class="code-block" data-lang="ruby">
+numeros = [1, 2, 3, 4, 5]
+
+# Índices positivos (do início)
+numeros[0]      # =&gt; 1
+numeros.first   # =&gt; 1
+numeros[2]      # =&gt; 3
+
+# Índices negativos (do fim)
+numeros[-1]     # =&gt; 5
+numeros.last    # =&gt; 5
+numeros[-2]     # =&gt; 4
+
+# Ranges
+numeros[1..3]   # =&gt; [2, 3, 4]
+numeros[1...3]  # =&gt; [2, 3]
+</div></section><section class="chapter"><h3 id="modificando-arrays" data-toc="modificando-arrays">Modificando Arrays</h3><div class="code-block" data-lang="ruby">
+lista = [1, 2, 3]
+
+# Adicionando elementos
+lista &lt;&lt; 4           # =&gt; [1, 2, 3, 4]
+lista.push(5)        # =&gt; [1, 2, 3, 4, 5]
+lista.unshift(0)     # =&gt; [0, 1, 2, 3, 4, 5]
+
+# Removendo elementos
+lista.pop            # =&gt; 5
+lista.shift          # =&gt; 0
+lista.delete(2)      # Remove o elemento 2
+
+# Modificando elementos
+lista[0] = &quot;primeiro&quot;
+</div></section><section class="chapter"><h3 id="m-todos-teis-para-arrays" data-toc="m-todos-teis-para-arrays">M&eacute;todos &Uacute;teis para Arrays</h3><div class="code-block" data-lang="ruby">
+numeros = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3]
+
+# Ordenação
+numeros.sort              # =&gt; [1, 1, 2, 3, 3, 4, 5, 5, 6, 9]
+numeros.sort.uniq        # =&gt; [1, 2, 3, 4, 5, 6, 9]
+
+# Transformação
+numeros.map { |n| n * 2 }  # =&gt; [6, 2, 8, 2, 10, 18, 4, 12, 10, 6]
+numeros.select { |n| n &gt; 4 } # =&gt; [5, 9, 6, 5]
+
+# Iteração
+numeros.each { |n| puts n }
+numeros.each_with_index { |n, i| puts &quot;#{i}: #{n}&quot; }
+</div></section></section><section class="chapter"><h2 id="hashes" data-toc="hashes">Hashes</h2><p id="z1dqvep_18">Hashes s&atilde;o cole&ccedil;&otilde;es de pares chave-valor, similares a dicion&aacute;rios em outras linguagens.</p><section class="chapter"><h3 id="cria-o-de-hashes" data-toc="cria-o-de-hashes">Cria&ccedil;&atilde;o de Hashes</h3><div class="code-block" data-lang="ruby">
+# Diferentes sintaxes
+hash1 = {}
+hash2 = Hash.new
+hash3 = { &quot;nome&quot; =&gt; &quot;Ruby&quot;, &quot;versao&quot; =&gt; 3.2 }
+hash4 = { nome: &quot;Ruby&quot;, versao: 3.2 }  # Sintaxe moderna com símbolos
+
+# Hash com valor padrão
+scores = Hash.new(0)  # Valor padrão para chaves inexistentes
+</div></section><section class="chapter"><h3 id="acessando-e-modificando" data-toc="acessando-e-modificando">Acessando e Modificando</h3><div class="code-block" data-lang="ruby">
+pessoa = { nome: &quot;Alice&quot;, idade: 30, cidade: &quot;São Paulo&quot; }
+
+# Acessando valores
+pessoa[:nome]    # =&gt; &quot;Alice&quot;
+pessoa.fetch(:idade)  # =&gt; 30
+
+# Modificando valores
+pessoa[:idade] = 31
+pessoa[:profissao] = &quot;Desenvolvedora&quot;
+
+# Removendo pares
+pessoa.delete(:cidade)
+</div></section><section class="chapter"><h3 id="m-todos-teis-para-hashes" data-toc="m-todos-teis-para-hashes">M&eacute;todos &Uacute;teis para Hashes</h3><div class="code-block" data-lang="ruby">
+# Iteração
+pessoa.each do |chave, valor|
+  puts &quot;#{chave}: #{valor}&quot;
+end
+
+# Chaves e valores
+pessoa.keys     # =&gt; [:nome, :idade, :profissao]
+pessoa.values   # =&gt; [&quot;Alice&quot;, 31, &quot;Desenvolvedora&quot;]
+
+# Transformação
+pessoa.transform_values { |v| v.to_s }
+pessoa.select { |k, v| v.is_a?(String) }
+</div></section></section><section class="chapter"><h2 id="combinando-arrays-e-hashes" data-toc="combinando-arrays-e-hashes">Combinando Arrays e Hashes</h2><section class="chapter"><h3 id="arrays-de-hashes" data-toc="arrays-de-hashes">Arrays de Hashes</h3><div class="code-block" data-lang="ruby">
+usuarios = [
+  { id: 1, nome: &quot;Alice&quot;, admin: true },
+  { id: 2, nome: &quot;Bob&quot;, admin: false },
+  { id: 3, nome: &quot;Carol&quot;, admin: true }
+]
+
+# Encontrando usuários
+admins = usuarios.select { |u| u[:admin] }
+nomes = usuarios.map { |u| u[:nome] }
+</div></section><section class="chapter"><h3 id="hash-com-arrays" data-toc="hash-com-arrays">Hash com Arrays</h3><div class="code-block" data-lang="ruby">
+biblioteca = {
+  ficção: [&quot;1984&quot;, &quot;Fundação&quot;, &quot;Neuromancer&quot;],
+  técnico: [&quot;Clean Code&quot;, &quot;Ruby Design Patterns&quot;],
+  poesia: [&quot;O Corvo&quot;, &quot;Os Lusíadas&quot;]
+}
+
+# Manipulando a biblioteca
+biblioteca[:ficção] &lt;&lt; &quot;Duna&quot;
+todos_livros = biblioteca.values.flatten
+</div></section></section><section class="chapter"><h2 id="boas-pr-ticas" data-toc="boas-pr-ticas">Boas Pr&aacute;ticas</h2><div class="code-block" data-lang="ruby">
+# Use símbolos como chaves de hash
+config = {
+  porta: 3000,
+  host: &quot;localhost&quot;,
+  debug: true
+}
+
+# Use map ao invés de each para transformações
+nomes = [&quot;alice&quot;, &quot;bob&quot;, &quot;carol&quot;]
+nomes_maiusculos = nomes.map(&amp;:upcase)
+
+# Use select/reject para filtrar
+numeros = [1, 2, 3, 4, 5, 6]
+pares = numeros.select(&amp;:even?)
+impares = numeros.reject(&amp;:even?)
+</div></section><div class="last-modified">14 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="numeric.html" class="navigation-links__prev">Tipos Num&eacute;ricos em Ruby</a><a href="ranges.html" class="navigation-links__next">Ranges em Ruby</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

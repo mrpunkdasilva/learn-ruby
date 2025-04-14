@@ -1,0 +1,79 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#E8488B"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-04-14T15:11:59.660958033"><title>Equipando seu Arsenal Ruby | Learn Ruby</title><script type="application/json" id="virtual-toc-data">[{"id":"kit-de-desenvolvimento-essencial","level":0,"title":"🛠️ Kit de Desenvolvimento Essencial","anchor":"#kit-de-desenvolvimento-essencial"},{"id":"gerenciadores-de-vers-o","level":0,"title":"🔧 Gerenciadores de Versão","anchor":"#gerenciadores-de-vers-o"},{"id":"gemas-essenciais","level":0,"title":"💎 Gemas Essenciais","anchor":"#gemas-essenciais"},{"id":"testando-sua-instala-o","level":0,"title":"🧪 Testando sua Instalação","anchor":"#testando-sua-instala-o"},{"id":"configura-o-do-terminal","level":0,"title":"🎮 Configuração do Terminal","anchor":"#configura-o-do-terminal"},{"id":"resolu-o-de-problemas-comuns","level":0,"title":"🚨 Resolução de Problemas Comuns","anchor":"#resolu-o-de-problemas-comuns"},{"id":"checklist-final","level":0,"title":"📝 Checklist Final","anchor":"#checklist-final"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Equipando seu Arsenal Ruby | Learn Ruby"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Learn Ruby Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/installation.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Equipando seu Arsenal Ruby | Learn Ruby"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/installation.html#webpage",
+    "url": "writerside-documentation/installation.html",
+    "name": "Equipando seu Arsenal Ruby | Learn Ruby",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Ruby Help"
+}</script><!-- End Schema.org --></head><body data-id="installation" data-main-title="Equipando seu Arsenal Ruby" data-article-props="{&quot;seeAlso&quot;:[{&quot;title&quot;:&quot;Miscellaneous&quot;,&quot;links&quot;:[{&quot;url&quot;:&quot;https://rvm.io/rvm/install&quot;,&quot;text&quot;:&quot;RVM - Guia Completo&quot;},{&quot;url&quot;:&quot;https://github.com/rbenv/rbenv#installation&quot;,&quot;text&quot;:&quot;rbenv - Documentação&quot;},{&quot;url&quot;:&quot;https://code.visualstudio.com/docs/languages/ruby&quot;,&quot;text&quot;:&quot;VSCode + Ruby&quot;}]}],&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="getting-started.md|Iniciando sua Jornada no Submundo Ruby"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Ruby  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="installation" id="installation.md">Equipando seu Arsenal Ruby</h1><div class="code-block" data-lang="none">
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠾⠛⢉⣉⣉⣉⡉⠛⠷⣦⣄⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⠋⣠⣴⣿⣿⣿⣿⣿⡿⣿⣶⣌⠹⣷⡀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⠁⣴⣿⣿⣿⣿⣿⣿⣿⣿⣆⠉⠻⣧⠘⣷⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⡇⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠀⠀⠈⠀⢹⡇⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⢸⣿⠛⣿⣿⣿⣿⣿⣿⡿⠃⠀⠀⠀⠀⢸⡇⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣷⠀⢿⡆⠈⠛⠻⠟⠛⠉⠀⠀⠀⠀⠀⠀⣾⠃⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣧⡀⠻⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⠃⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢼⠿⣦⣄⠀⠀⠀⠀⠀⠀⠀⣀⣴⠟⠁⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⣀⡈⠀⠈⠙⠛⠶⠶⠶⠶⠛⠋⠁⠀⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀
+    ⠀⠀⠀⠀⠀⠀⠀⠘⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠛⠃⠀⠀⠀⠀⠀
+</div><aside class="prompt" data-type="tip" data-title="" id="yu77u2_4"><p id="yu77u2_14">&quot;Um desenvolvedor sem suas ferramentas &eacute; como um samurai sem katana - precisa do equipamento certo para fazer um bom trabalho.&quot;</p><ul class="list _bullet" id="yu77u2_15"><li class="list__item" id="yu77u2_16"><p id="yu77u2_17"><span class="emphasis" id="yu77u2_18">Manual do Desenvolvedor Ruby</span></p></li></ul></aside><section class="chapter"><h2 id="kit-de-desenvolvimento-essencial" data-toc="kit-de-desenvolvimento-essencial">🛠️ Kit de Desenvolvimento Essencial</h2><section class="chapter"><h3 id="editor-de-c-digo-seu-ambiente-principal" data-toc="editor-de-c-digo-seu-ambiente-principal">Editor de C&oacute;digo (Seu Ambiente Principal)</h3><section class="chapter"><h4 id="vscode-editor-moderno-e-vers-til" data-toc="vscode-editor-moderno-e-vers-til">💜 VSCode (Editor Moderno e Vers&aacute;til)</h4><div class="code-block" data-lang="bash">
+# Windows/macOS
+# Baixe em code.visualstudio.com
+
+# Linux
+sudo snap install code # Ubuntu
+sudo pacman -S code # Arch Linux
+</div><p id="yu77u2_23">Extens&otilde;es Essenciais:</p><ul class="list _bullet" id="yu77u2_24"><li class="list__item" id="yu77u2_25"><p id="yu77u2_28">Ruby</p></li><li class="list__item" id="yu77u2_26"><p id="yu77u2_29">Endwise (Fechamento autom&aacute;tico de blocos)</p></li><li class="list__item" id="yu77u2_27"><p id="yu77u2_30">Ruby Solargraph (Autocompletar inteligente)</p></li></ul></section><section class="chapter"><h4 id="vim-neovim-editor-avan-ado" data-toc="vim-neovim-editor-avan-ado">🐱 Vim/Neovim (Editor Avan&ccedil;ado)</h4><div class="code-block" data-lang="bash">
+# Instalação
+sudo apt install neovim # Ubuntu
+sudo pacman -S neovim # Arch Linux
+brew install neovim # macOS
+</div></section></section></section><section class="chapter"><h2 id="gerenciadores-de-vers-o" data-toc="gerenciadores-de-vers-o">🔧 Gerenciadores de Vers&atilde;o</h2><section class="chapter"><h3 id="rvm-ruby-version-manager" data-toc="rvm-ruby-version-manager">RVM (Ruby Version Manager)</h3><div class="code-block" data-lang="bash">
+# Instalação básica
+gpg --keyserver keyserver.ubuntu.com --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 7D2BAF1CF37B13E2069D6956105BD0E739499BDB
+
+\curl -sSL https://get.rvm.io | bash
+</div></section><section class="chapter"><h3 id="rbenv-alternativa-leve" data-toc="rbenv-alternativa-leve">rbenv (Alternativa Leve)</h3><div class="code-block" data-lang="bash">
+# macOS
+brew install rbenv ruby-build
+
+# Linux
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+</div></section></section><section class="chapter"><h2 id="gemas-essenciais" data-toc="gemas-essenciais">💎 Gemas Essenciais</h2><div class="code-block" data-lang="ruby">
+# Gemas fundamentais para desenvolvimento
+gem install bundler # Gerenciador de dependências
+gem install rails # Framework web completo
+gem install pry # Depurador interativo
+gem install rubocop # Analisador de código
+</div></section><section class="chapter"><h2 id="testando-sua-instala-o" data-toc="testando-sua-instala-o">🧪 Testando sua Instala&ccedil;&atilde;o</h2><div class="code-block" data-lang="ruby">
+# Crie um arquivo test_setup.rb
+require 'bundler'
+require 'rails'
+require 'pry'
+
+puts &quot;✓ Bundler #{Bundler::VERSION}&quot;
+puts &quot;✓ Rails #{Rails::VERSION::STRING}&quot;
+puts &quot;✓ Ruby #{RUBY_VERSION}&quot;
+puts &quot;\nInstalação concluída com sucesso!&quot;
+</div></section><section class="chapter"><h2 id="configura-o-do-terminal" data-toc="configura-o-do-terminal">🎮 Configura&ccedil;&atilde;o do Terminal</h2><section class="chapter"><h3 id="oh-my-zsh-personaliza-o-do-terminal" data-toc="oh-my-zsh-personaliza-o-do-terminal">Oh My Zsh (Personaliza&ccedil;&atilde;o do Terminal)</h3><div class="code-block" data-lang="bash">
+sh -c &quot;$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)&quot;
+</div><p id="yu77u2_40">Temas Recomendados:</p><ul class="list _bullet" id="yu77u2_41"><li class="list__item" id="yu77u2_42"><p id="yu77u2_45">Powerlevel10k (Interface moderna)</p></li><li class="list__item" id="yu77u2_43"><p id="yu77u2_46">Agnoster (Visual elegante)</p></li><li class="list__item" id="yu77u2_44"><p id="yu77u2_47">Dracula (Tema escuro profissional)</p></li></ul></section></section><section class="chapter"><h2 id="resolu-o-de-problemas-comuns" data-toc="resolu-o-de-problemas-comuns">🚨 Resolu&ccedil;&atilde;o de Problemas Comuns</h2><div class="table-wrapper"><table class="wide" id="yu77u2_48"><thead><tr class="ijRowHead" id="yu77u2_49"><th id="yu77u2_54"><p>Problema</p></th><th id="yu77u2_55"><p>Solu&ccedil;&atilde;o Padr&atilde;o</p></th><th id="yu77u2_56"><p>Solu&ccedil;&atilde;o Alternativa</p></th></tr></thead><tbody><tr id="yu77u2_50"><td id="yu77u2_57"><p>&quot;Comando n&atilde;o encontrado&quot;</p></td><td id="yu77u2_58"><p>Adicionar ao PATH</p></td><td id="yu77u2_59"><p>Reiniciar o terminal</p></td></tr><tr id="yu77u2_51"><td id="yu77u2_60"><p>Permiss&atilde;o negada</p></td><td id="yu77u2_61"><p><code class="code" id="yu77u2_63">chmod +x</code></p></td><td id="yu77u2_62"><p><code class="code" id="yu77u2_64">sudo !!</code></p></td></tr><tr id="yu77u2_52"><td id="yu77u2_65"><p>Gem n&atilde;o instala</p></td><td id="yu77u2_66"><p>Verificar documenta&ccedil;&atilde;o</p></td><td id="yu77u2_67"><p>Consultar StackOverflow</p></td></tr><tr id="yu77u2_53"><td id="yu77u2_68"><p>Terminal n&atilde;o responde</p></td><td id="yu77u2_69"><p>Ctrl+C</p></td><td id="yu77u2_70"><p>Fechar e reabrir terminal</p></td></tr></tbody></table></div></section><section class="chapter"><h2 id="checklist-final" data-toc="checklist-final">📝 Checklist Final</h2><div class="code-block" data-lang="none">
+┌────────────────────────────┐
+│ ✓ Ruby instalado          │
+│ ✓ Editor configurado      │
+│ ✓ Gemas básicas          │
+│ ✓ Terminal personalizado  │
+│ ✓ Ambiente pronto        │
+└────────────────────────────┘
+</div></section><aside class="prompt" data-type="tip" data-title="" id="yu77u2_13"><p id="yu77u2_76"><span class="control" id="yu77u2_77">DICA PROFISSIONAL</span>: Mantenha um terminal aberto com <code class="code" id="yu77u2_78">tail -f log/development.log</code> para monitoramento em tempo real do seu aplicativo.</p></aside><div class="last-modified">14 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="getting-started.html" class="navigation-links__prev">Iniciando sua Jornada no Submundo Ruby</a><a href="first-steps.html" class="navigation-links__next">Primeiros Passos com Ruby</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

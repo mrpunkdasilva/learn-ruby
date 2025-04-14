@@ -1,0 +1,196 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#E8488B"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-04-14T15:11:59.661452186"><title>Loops em Ruby | Learn Ruby</title><script type="application/json" id="virtual-toc-data">[{"id":"while-e-until","level":0,"title":"while e until","anchor":"#while-e-until"},{"id":"for-e-each","level":0,"title":"for e each","anchor":"#for-e-each"},{"id":"loop","level":0,"title":"loop","anchor":"#loop"},{"id":"controle-de-loop","level":0,"title":"Controle de Loop","anchor":"#controle-de-loop"},{"id":"iteradores-especiais","level":0,"title":"Iteradores Especiais","anchor":"#iteradores-especiais"},{"id":"exemplos-pr-ticos","level":0,"title":"Exemplos Práticos","anchor":"#exemplos-pr-ticos"},{"id":"boas-pr-ticas","level":0,"title":"Boas Práticas","anchor":"#boas-pr-ticas"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Loops em Ruby | Learn Ruby"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Learn Ruby Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/loops.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Loops em Ruby | Learn Ruby"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/loops.html#webpage",
+    "url": "writerside-documentation/loops.html",
+    "name": "Loops em Ruby | Learn Ruby",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Ruby Help"
+}</script><!-- End Schema.org --></head><body data-id="loops" data-main-title="Loops em Ruby" data-article-props="{&quot;seeAlso&quot;:[{&quot;title&quot;:&quot;Miscellaneous&quot;,&quot;links&quot;:[{&quot;url&quot;:&quot;https://ruby-doc.org/core/Enumerable.html&quot;,&quot;text&quot;:&quot;Documentação do Enumerable&quot;},{&quot;url&quot;:&quot;https://ruby-doc.org/core/Integer.html&quot;,&quot;text&quot;:&quot;Documentação de Integer (para times, upto, etc)&quot;}]}],&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="control-structures.md|Estruturas de Controle em Ruby"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Ruby  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="loops" id="loops.md">Loops em Ruby</h1><p id="n6twbb_3">Ruby oferece v&aacute;rias formas de criar loops e itera&ccedil;&otilde;es, cada uma com seus casos de uso espec&iacute;ficos.</p><section class="chapter"><h2 id="while-e-until" data-toc="while-e-until">while e until</h2><section class="chapter"><h3 id="while" data-toc="while">while</h3><div class="code-block" data-lang="ruby">
+# Estrutura básica
+while condicao
+  # código a ser executado
+end
+
+# Exemplo prático
+contador = 0
+while contador &lt; 5
+  puts contador
+  contador += 1
+end
+
+# Forma modificadora
+puts &quot;Ainda processando...&quot; while processo_ativo?
+</div></section><section class="chapter"><h3 id="until" data-toc="until">until</h3><div class="code-block" data-lang="ruby">
+# Estrutura básica
+until condicao
+  # código a ser executado
+end
+
+# Exemplo prático
+tempo = 10
+until tempo.zero?
+  puts &quot;#{tempo} segundos restantes&quot;
+  tempo -= 1
+  sleep 1
+end
+</div></section></section><section class="chapter"><h2 id="for-e-each" data-toc="for-e-each">for e each</h2><section class="chapter"><h3 id="for" data-toc="for">for</h3><div class="code-block" data-lang="ruby">
+# Iterando sobre range
+for i in 0..5
+  puts &quot;Número: #{i}&quot;
+end
+
+# Iterando sobre array
+frutas = [&quot;maçã&quot;, &quot;banana&quot;, &quot;laranja&quot;]
+for fruta in frutas
+  puts &quot;Fruta: #{fruta}&quot;
+end
+</div></section><section class="chapter"><h3 id="each" data-toc="each">each</h3><div class="code-block" data-lang="ruby">
+# Com arrays
+[1, 2, 3].each do |numero|
+  puts &quot;O dobro de #{numero} é #{numero * 2}&quot;
+end
+
+# Com hashes
+usuario = { nome: &quot;João&quot;, idade: 30 }
+usuario.each do |chave, valor|
+  puts &quot;#{chave}: #{valor}&quot;
+end
+
+# Forma compacta
+(1..5).each { |n| print &quot;#{n} &quot; }
+</div></section></section><section class="chapter"><h2 id="loop" data-toc="loop">loop</h2><div class="code-block" data-lang="ruby">
+# Loop infinito com break
+loop do
+  print &quot;Digite 'sair' para encerrar: &quot;
+  entrada = gets.chomp
+  break if entrada == 'sair'
+end
+
+# Com contador
+contador = 0
+loop do
+  puts contador
+  contador += 1
+  break if contador &gt;= 5
+end
+</div></section><section class="chapter"><h2 id="controle-de-loop" data-toc="controle-de-loop">Controle de Loop</h2><section class="chapter"><h3 id="break-next-e-redo" data-toc="break-next-e-redo">break, next e redo</h3><div class="code-block" data-lang="ruby">
+# break - sai do loop
+numeros = [1, 2, 3, 4, 5]
+numeros.each do |n|
+  break if n &gt; 3
+  puts n
+end
+
+# next - pula para próxima iteração
+numeros.each do |n|
+  next if n.even?
+  puts n
+end
+
+# redo - repete a iteração atual
+tentativas = 0
+numeros.each do |n|
+  tentativas += 1
+  redo if falhou?(n) &amp;&amp; tentativas &lt; 3
+end
+</div></section></section><section class="chapter"><h2 id="iteradores-especiais" data-toc="iteradores-especiais">Iteradores Especiais</h2><section class="chapter"><h3 id="times" data-toc="times">times</h3><div class="code-block" data-lang="ruby">
+5.times do |i|
+  puts &quot;Iteração #{i}&quot;
+end
+
+# Forma compacta
+3.times { puts &quot;Olá!&quot; }
+</div></section><section class="chapter"><h3 id="upto-e-downto" data-toc="upto-e-downto">upto e downto</h3><div class="code-block" data-lang="ruby">
+# Contagem crescente
+1.upto(5) do |n|
+  puts n
+end
+
+# Contagem regressiva
+5.downto(1) do |n|
+  puts n
+end
+</div></section><section class="chapter"><h3 id="step" data-toc="step">step</h3><div class="code-block" data-lang="ruby">
+# Contando de 2 em 2
+0.step(10, 2) do |n|
+  puts n
+end
+
+# Números decimais
+0.0.step(1.0, 0.2) { |n| puts n }
+</div></section></section><section class="chapter"><h2 id="exemplos-pr-ticos" data-toc="exemplos-pr-ticos">Exemplos Pr&aacute;ticos</h2><section class="chapter"><h3 id="processamento-de-dados" data-toc="processamento-de-dados">Processamento de Dados</h3><div class="code-block" data-lang="ruby">
+def processar_lista(items)
+  items.each_with_index do |item, index|
+    next if item.nil?
+    break if index &gt; 100  # limite de segurança
+    
+    resultado = processar_item(item)
+    redo if resultado == :retry
+  end
+end
+
+def ler_arquivo(caminho)
+  File.foreach(caminho) do |linha|
+    next if linha.strip.empty?
+    yield linha if block_given?
+  end
+end
+</div></section><section class="chapter"><h3 id="menus-interativos" data-toc="menus-interativos">Menus Interativos</h3><div class="code-block" data-lang="ruby">
+def menu_principal
+  loop do
+    puts &quot;\n=== Menu Principal ===&quot;
+    puts &quot;1. Novo jogo&quot;
+    puts &quot;2. Carregar jogo&quot;
+    puts &quot;3. Configurações&quot;
+    puts &quot;4. Sair&quot;
+    
+    print &quot;\nEscolha uma opção: &quot;
+    opcao = gets.chomp
+    
+    case opcao
+    when &quot;1&quot; then novo_jogo
+    when &quot;2&quot; then carregar_jogo
+    when &quot;3&quot; then configuracoes
+    when &quot;4&quot; then break
+    else puts &quot;Opção inválida!&quot;
+    end
+  end
+end
+</div></section></section><section class="chapter"><h2 id="boas-pr-ticas" data-toc="boas-pr-ticas">Boas Pr&aacute;ticas</h2><div class="code-block" data-lang="ruby">
+# Prefira each sobre for
+# Não recomendado
+for i in array
+  # código
+end
+
+# Recomendado
+array.each do |item|
+  # código
+end
+
+# Use iteradores específicos quando possível
+# Não recomendado
+i = 0
+while i &lt; 5
+  puts i
+  i += 1
+end
+
+# Recomendado
+5.times { |i| puts i }
+
+# Evite loops infinitos acidentais
+# Sempre tenha uma condição de saída clara
+loop do
+  # código
+  break if condicao_saida
+end
+</div></section><div class="last-modified">14 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="conditionals.html" class="navigation-links__prev">Condicionais em Ruby</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

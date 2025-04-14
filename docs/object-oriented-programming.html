@@ -1,0 +1,217 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#E8488B"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-04-14T15:53:13.381842378"><title>Programa&ccedil;&atilde;o Orientada a Objetos em Ruby | Learn Ruby</title><script type="application/json" id="virtual-toc-data">[{"id":"fundamentos","level":0,"title":"Fundamentos","anchor":"#fundamentos"},{"id":"os-quatro-pilares-da-oop","level":0,"title":"Os Quatro Pilares da OOP","anchor":"#os-quatro-pilares-da-oop"},{"id":"caracter-sticas-nicas-em-ruby","level":0,"title":"Características Únicas em Ruby","anchor":"#caracter-sticas-nicas-em-ruby"},{"id":"boas-pr-ticas","level":0,"title":"Boas Práticas","anchor":"#boas-pr-ticas"},{"id":"padr-es-de-design-comuns","level":0,"title":"Padrões de Design Comuns","anchor":"#padr-es-de-design-comuns"},{"id":"dicas-e-truques","level":0,"title":"Dicas e Truques","anchor":"#dicas-e-truques"},{"id":"recursos-avan-ados","level":0,"title":"Recursos Avançados","anchor":"#recursos-avan-ados"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Programa&ccedil;&atilde;o Orientada a Objetos em Ruby | Learn Ruby"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Learn Ruby Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/object-oriented-programming.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Programa&ccedil;&atilde;o Orientada a Objetos em Ruby | Learn Ruby"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/object-oriented-programming.html#webpage",
+    "url": "writerside-documentation/object-oriented-programming.html",
+    "name": "Programa&ccedil;&atilde;o Orientada a Objetos em Ruby | Learn Ruby",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Ruby Help"
+}</script><!-- End Schema.org --></head><body data-id="object-oriented-programming" data-main-title="Programação Orientada a Objetos em Ruby" data-article-props="{&quot;seeAlso&quot;:[{&quot;title&quot;:&quot;Miscellaneous&quot;,&quot;links&quot;:[{&quot;url&quot;:&quot;https://ruby-doc.org/core/Object.html&quot;,&quot;text&quot;:&quot;Documentação de Object&quot;},{&quot;url&quot;:&quot;https://ruby-doc.org/core/Module.html&quot;,&quot;text&quot;:&quot;Documentação de Module&quot;},{&quot;url&quot;:&quot;https://ruby-doc.org/core/Class.html&quot;,&quot;text&quot;:&quot;Documentação de Class&quot;}]}],&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs=""><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Ruby  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="object-oriented-programming" id="object-oriented-programming.md">Programação Orientada a Objetos em Ruby</h1><section class="chapter"><h2 id="fundamentos" data-toc="fundamentos">Fundamentos</h2><p id="-c6u77c_11">Em Ruby, tudo &eacute; um objeto. Esta n&atilde;o &eacute; apenas uma frase de efeito - &eacute; um princ&iacute;pio fundamental da linguagem.</p><section class="chapter"><h3 id="o-b-sico-dos-objetos" data-toc="o-b-sico-dos-objetos">O B&aacute;sico dos Objetos</h3><div class="code-block" data-lang="ruby">
+# Até números são objetos
+42.class          # =&gt; Integer
+42.methods.sort   # Lista todos os métodos disponíveis
+
+# Strings também são objetos
+&quot;ruby&quot;.upcase     # =&gt; &quot;RUBY&quot;
+&quot;ruby&quot;.reverse    # =&gt; &quot;ybur&quot;
+</div></section></section><section class="chapter"><h2 id="os-quatro-pilares-da-oop" data-toc="os-quatro-pilares-da-oop">Os Quatro Pilares da OOP</h2><section class="chapter"><h3 id="1-encapsulamento" data-toc="1-encapsulamento">1. Encapsulamento</h3><div class="code-block" data-lang="ruby">
+class ContaBancaria
+  def initialize(saldo_inicial)
+    @saldo = saldo_inicial
+  end
+
+  def depositar(valor)
+    @saldo += valor
+  end
+
+  private
+
+  def validar_saldo
+    @saldo &gt; 0
+  end
+end
+</div></section><section class="chapter"><h3 id="2-heran-a" data-toc="2-heran-a">2. Heran&ccedil;a</h3><div class="code-block" data-lang="ruby">
+class Animal
+  def falar
+    &quot;Som genérico&quot;
+  end
+end
+
+class Cachorro &lt; Animal
+  def falar
+    &quot;Au au!&quot;
+  end
+end
+</div></section><section class="chapter"><h3 id="3-polimorfismo" data-toc="3-polimorfismo">3. Polimorfismo</h3><div class="code-block" data-lang="ruby">
+class Ave
+  def voar
+    &quot;Voando...&quot;
+  end
+end
+
+class Pinguim &lt; Ave
+  def voar
+    &quot;Desculpe, não posso voar&quot;
+  end
+end
+
+def fazer_voar(ave)
+  ave.voar
+end
+</div></section><section class="chapter"><h3 id="4-abstra-o" data-toc="4-abstra-o">4. Abstra&ccedil;&atilde;o</h3><div class="code-block" data-lang="ruby">
+class Veiculo
+  def iniciar
+    ligar_motor
+    verificar_sistemas
+    liberar_freios
+  end
+
+  private
+
+  def ligar_motor
+    # Implementação específica
+  end
+
+  def verificar_sistemas
+    # Implementação específica
+  end
+end
+</div></section></section><section class="chapter"><h2 id="caracter-sticas-nicas-em-ruby" data-toc="caracter-sticas-nicas-em-ruby">Caracter&iacute;sticas &Uacute;nicas em Ruby</h2><section class="chapter"><h3 id="duck-typing" data-toc="duck-typing">Duck Typing</h3><div class="code-block" data-lang="ruby">
+def processar(objeto)
+  if objeto.respond_to?(:calcular)
+    objeto.calcular
+  else
+    &quot;Objeto não suporta cálculo&quot;
+  end
+end
+</div></section><section class="chapter"><h3 id="mixins-com-modules" data-toc="mixins-com-modules">Mixins com Modules</h3><div class="code-block" data-lang="ruby">
+module Nadador
+  def nadar
+    &quot;Nadando...&quot;
+  end
+end
+
+class Pato
+  include Nadador
+end
+
+pato = Pato.new
+pato.nadar  # =&gt; &quot;Nadando...&quot;
+</div></section><section class="chapter"><h3 id="open-classes" data-toc="open-classes">Open Classes</h3><div class="code-block" data-lang="ruby">
+class String
+  def palindromo?
+    self.downcase == self.downcase.reverse
+  end
+end
+
+&quot;ovo&quot;.palindromo?  # =&gt; true
+</div></section></section><section class="chapter"><h2 id="boas-pr-ticas" data-toc="boas-pr-ticas">Boas Pr&aacute;ticas</h2><section class="chapter"><h3 id="solid-em-ruby" data-toc="solid-em-ruby">SOLID em Ruby</h3><div class="code-block" data-lang="ruby">
+# Single Responsibility Principle
+class RelatorioFinanceiro
+  def gerar
+    dados = coletar_dados
+    formatar(dados)
+  end
+
+  private
+
+  def coletar_dados
+    # Lógica de coleta
+  end
+
+  def formatar(dados)
+    # Lógica de formatação
+  end
+end
+</div></section><section class="chapter"><h3 id="composi-o-vs-heran-a" data-toc="composi-o-vs-heran-a">Composi&ccedil;&atilde;o vs Heran&ccedil;a</h3><div class="code-block" data-lang="ruby">
+# Preferir composição
+class Carro
+  def initialize
+    @motor = Motor.new
+    @transmissao = Transmissao.new
+  end
+
+  def ligar
+    @motor.ligar
+    @transmissao.engatar
+  end
+end
+</div></section></section><section class="chapter"><h2 id="padr-es-de-design-comuns" data-toc="padr-es-de-design-comuns">Padr&otilde;es de Design Comuns</h2><section class="chapter"><h3 id="factory-method" data-toc="factory-method">Factory Method</h3><div class="code-block" data-lang="ruby">
+class DocumentoFactory
+  def self.criar(tipo)
+    case tipo
+    when :pdf
+      PDFDocument.new
+    when :doc
+      WordDocument.new
+    else
+      raise &quot;Tipo de documento desconhecido&quot;
+    end
+  end
+end
+</div></section><section class="chapter"><h3 id="singleton" data-toc="singleton">Singleton</h3><div class="code-block" data-lang="ruby">
+require 'singleton'
+
+class Logger
+  include Singleton
+  
+  def log(msg)
+    puts &quot;[LOG] #{msg}&quot;
+  end
+end
+
+Logger.instance.log(&quot;Mensagem&quot;)
+</div></section></section><section class="chapter"><h2 id="dicas-e-truques" data-toc="dicas-e-truques">Dicas e Truques</h2><section class="chapter"><h3 id="method-missing" data-toc="method-missing">Method Missing</h3><div class="code-block" data-lang="ruby">
+class Tradutor
+  def method_missing(nome_metodo, *args)
+    palavra = nome_metodo.to_s
+    if palavra.start_with?(&quot;traduzir_&quot;)
+      &quot;Tradução de: #{palavra.sub('traduzir_', '')}&quot;
+    else
+      super
+    end
+  end
+end
+</div></section><section class="chapter"><h3 id="reflex-o" data-toc="reflex-o">Reflex&atilde;o</h3><div class="code-block" data-lang="ruby">
+class Exemplo
+  def initialize
+    @variavel = 42
+  end
+
+  def listar_metodos
+    methods - Object.methods
+  end
+
+  def listar_variaveis
+    instance_variables
+  end
+end
+</div></section></section><section class="chapter"><h2 id="recursos-avan-ados" data-toc="recursos-avan-ados">Recursos Avan&ccedil;ados</h2><section class="chapter"><h3 id="metaprograma-o-b-sica" data-toc="metaprograma-o-b-sica">Metaprograma&ccedil;&atilde;o B&aacute;sica</h3><div class="code-block" data-lang="ruby">
+class Dinamico
+  def self.criar_metodo(nome)
+    define_method(nome) do |arg|
+      &quot;Método #{nome} chamado com #{arg}&quot;
+    end
+  end
+end
+
+Dinamico.criar_metodo(:teste)
+</div></section><section class="chapter"><h3 id="delega-o" data-toc="delega-o">Delega&ccedil;&atilde;o</h3><div class="code-block" data-lang="ruby">
+require 'forwardable'
+
+class Playlist
+  extend Forwardable
+  def_delegators :@songs, :&lt;&lt;, :first, :last
+
+  def initialize
+    @songs = []
+  end
+end
+</div></section></section><div class="last-modified">14 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="closures.html" class="navigation-links__prev">Closures em Ruby</a><a href="classes-and-objects.html" class="navigation-links__next">Classes e Objetos em Ruby</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#E8488B"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-04-14T15:53:13.390625723"><title>Operadores em Ruby | Learn Ruby</title><script type="application/json" id="virtual-toc-data">[{"id":"operadores-aritm-ticos","level":0,"title":"Operadores Aritméticos","anchor":"#operadores-aritm-ticos"},{"id":"operadores-de-atribui-o","level":0,"title":"Operadores de Atribuição","anchor":"#operadores-de-atribui-o"},{"id":"operadores-de-compara-o","level":0,"title":"Operadores de Comparação","anchor":"#operadores-de-compara-o"},{"id":"operadores-l-gicos","level":0,"title":"Operadores Lógicos","anchor":"#operadores-l-gicos"},{"id":"operadores-de-range","level":0,"title":"Operadores de Range","anchor":"#operadores-de-range"},{"id":"operadores-bit-a-bit","level":0,"title":"Operadores Bit a Bit","anchor":"#operadores-bit-a-bit"},{"id":"operadores-especiais","level":0,"title":"Operadores Especiais","anchor":"#operadores-especiais"},{"id":"boas-pr-ticas","level":0,"title":"Boas Práticas","anchor":"#boas-pr-ticas"},{"id":"exemplos-pr-ticos","level":0,"title":"Exemplos Práticos","anchor":"#exemplos-pr-ticos"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Operadores em Ruby | Learn Ruby"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Learn Ruby Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/operators.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Operadores em Ruby | Learn Ruby"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/operators.html#webpage",
+    "url": "writerside-documentation/operators.html",
+    "name": "Operadores em Ruby | Learn Ruby",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Ruby Help"
+}</script><!-- End Schema.org --></head><body data-id="operators" data-main-title="Operadores em Ruby" data-article-props="{&quot;seeAlso&quot;:[{&quot;title&quot;:&quot;Miscellaneous&quot;,&quot;links&quot;:[{&quot;url&quot;:&quot;https://ruby-doc.org/core/doc/syntax/operators_rdoc.html&quot;,&quot;text&quot;:&quot;Documentação de Operadores&quot;},{&quot;url&quot;:&quot;https://ruby-doc.org/core/doc/syntax/precedence_rdoc.html&quot;,&quot;text&quot;:&quot;Precedência de Operadores&quot;}]}],&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="control-structures.md|Estruturas de Controle em Ruby"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Ruby  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="operators" id="operators.md">Operadores em Ruby</h1><p id="-3fs3hl_3">Ruby oferece uma rica variedade de operadores que permitem realizar opera&ccedil;&otilde;es matem&aacute;ticas, compara&ccedil;&otilde;es, atribui&ccedil;&otilde;es e opera&ccedil;&otilde;es l&oacute;gicas.</p><section class="chapter"><h2 id="operadores-aritm-ticos" data-toc="operadores-aritm-ticos">Operadores Aritm&eacute;ticos</h2><div class="code-block" data-lang="ruby">
+# Operações básicas
+soma = 5 + 3        # =&gt; 8
+subtracao = 10 - 4  # =&gt; 6
+produto = 4 * 3     # =&gt; 12
+divisao = 15 / 2    # =&gt; 7 (divisão inteira)
+modulo = 15 % 4     # =&gt; 3
+exponencial = 2 ** 3 # =&gt; 8
+
+# Divisão com ponto flutuante
+divisao_float = 15.0 / 2  # =&gt; 7.5
+divisao_float = 15.fdiv(2) # =&gt; 7.5
+</div></section><section class="chapter"><h2 id="operadores-de-atribui-o" data-toc="operadores-de-atribui-o">Operadores de Atribui&ccedil;&atilde;o</h2><div class="code-block" data-lang="ruby">
+# Atribuição simples
+x = 5
+
+# Atribuição com operação
+x += 3   # x = x + 3
+x -= 2   # x = x - 2
+x *= 4   # x = x * 4
+x /= 2   # x = x / 2
+x **= 2  # x = x ** 2
+x %= 3   # x = x % 3
+
+# Atribuição paralela
+a, b = 1, 2
+x, y = y, x  # Troca de valores
+</div></section><section class="chapter"><h2 id="operadores-de-compara-o" data-toc="operadores-de-compara-o">Operadores de Compara&ccedil;&atilde;o</h2><div class="code-block" data-lang="ruby">
+# Igualdade e diferença
+5 == 5    # =&gt; true
+5 != 3    # =&gt; true
+5 &lt;=&gt; 5   # =&gt; 0 (spaceship operator)
+
+# Maior e menor
+5 &gt; 3     # =&gt; true
+5 &gt;= 5    # =&gt; true
+3 &lt; 5     # =&gt; true
+3 &lt;= 5    # =&gt; true
+
+# Comparação de identidade
+a.equal?(b)    # Compara se são o mesmo objeto
+&quot;ruby&quot; === String  # =&gt; false
+String === &quot;ruby&quot;  # =&gt; true (case subsumption)
+</div></section><section class="chapter"><h2 id="operadores-l-gicos" data-toc="operadores-l-gicos">Operadores L&oacute;gicos</h2><div class="code-block" data-lang="ruby">
+# AND
+true &amp;&amp; true   # =&gt; true
+true and true  # =&gt; true (baixa precedência)
+
+# OR
+false || true   # =&gt; true
+false or true   # =&gt; true (baixa precedência)
+
+# NOT
+!true          # =&gt; false
+not true       # =&gt; false (baixa precedência)
+
+# Combinações
+(1 &lt; 2) &amp;&amp; (2 &lt; 3)  # =&gt; true
+</div></section><section class="chapter"><h2 id="operadores-de-range" data-toc="operadores-de-range">Operadores de Range</h2><div class="code-block" data-lang="ruby">
+# Range inclusivo
+1..5   # inclui 1, 2, 3, 4, 5
+
+# Range exclusivo
+1...5  # inclui 1, 2, 3, 4
+
+# Uso com strings
+'a'..'d'  # =&gt; 'a', 'b', 'c', 'd'
+</div></section><section class="chapter"><h2 id="operadores-bit-a-bit" data-toc="operadores-bit-a-bit">Operadores Bit a Bit</h2><div class="code-block" data-lang="ruby">
+# AND bit a bit
+5 &amp; 3   # =&gt; 1
+
+# OR bit a bit
+5 | 3   # =&gt; 7
+
+# XOR bit a bit
+5 ^ 3   # =&gt; 6
+
+# Deslocamento à esquerda
+5 &lt;&lt; 1  # =&gt; 10
+
+# Deslocamento à direita
+5 &gt;&gt; 1  # =&gt; 2
+</div></section><section class="chapter"><h2 id="operadores-especiais" data-toc="operadores-especiais">Operadores Especiais</h2><div class="code-block" data-lang="ruby">
+# Operador ternário
+idade &gt;= 18 ? &quot;Maior&quot; : &quot;Menor&quot;
+
+# Operador de segurança nula
+usuario&amp;.nome  # Retorna nil se usuario for nil
+
+# Operador de coalescência nula
+nome = nil
+nome ||= &quot;Anônimo&quot;  # Atribui &quot;Anônimo&quot; se nome for nil
+</div></section><section class="chapter"><h2 id="boas-pr-ticas" data-toc="boas-pr-ticas">Boas Pr&aacute;ticas</h2><div class="code-block" data-lang="ruby">
+# Use &amp;&amp; e || em vez de and e or para lógica
+if usuario &amp;&amp; usuario.ativo?
+  # código aqui
+end
+
+# Prefira operador ternário para condições simples
+status = idade &gt;= 18 ? &quot;Maior&quot; : &quot;Menor&quot;
+
+# Use operador de segurança nula para evitar NoMethodError
+usuario&amp;.endereco&amp;.cidade
+
+# Evite comparações encadeadas sem parênteses
+# Ruim
+if a &lt; b &amp;&amp; b &lt; c
+  # código
+end
+
+# Melhor
+if (a &lt; b) &amp;&amp; (b &lt; c)
+  # código
+end
+</div></section><section class="chapter"><h2 id="exemplos-pr-ticos" data-toc="exemplos-pr-ticos">Exemplos Pr&aacute;ticos</h2><div class="code-block" data-lang="ruby">
+def calcular_desconto(valor, tipo_cliente)
+  desconto = case tipo_cliente
+             when :vip     then 0.2
+             when :regular then 0.1
+             else 0.05
+             end
+  
+  valor * (1 - desconto)
+end
+
+def validar_idade(idade)
+  return &quot;Idade inválida&quot; unless idade&amp;.positive?
+  idade &gt;= 18 ? &quot;Maior de idade&quot; : &quot;Menor de idade&quot;
+end
+
+def combinar_strings(str1, str2)
+  resultado = str1&amp;.strip
+  resultado = &quot;#{resultado} #{str2}&quot;.strip if str2
+  resultado ||= &quot;Vazio&quot;
+end
+</div></section><div class="last-modified">14 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="control-structures.html" class="navigation-links__prev">Estruturas de Controle em Ruby</a><a href="conditionals.html" class="navigation-links__next">Condicionais em Ruby</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

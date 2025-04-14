@@ -1,0 +1,172 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#E8488B"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-04-14T15:53:13.370743314"><title>Trabalhando com Arquivos em Ruby | Learn Ruby</title><script type="application/json" id="virtual-toc-data">[{"id":"abrindo-e-fechando-arquivos","level":0,"title":"Abrindo e Fechando Arquivos","anchor":"#abrindo-e-fechando-arquivos"},{"id":"leitura-de-arquivos","level":0,"title":"Leitura de Arquivos","anchor":"#leitura-de-arquivos"},{"id":"escrita-em-arquivos","level":0,"title":"Escrita em Arquivos","anchor":"#escrita-em-arquivos"},{"id":"manipula-o-de-arquivos","level":0,"title":"Manipulação de Arquivos","anchor":"#manipula-o-de-arquivos"},{"id":"tratamento-de-erros","level":0,"title":"Tratamento de Erros","anchor":"#tratamento-de-erros"},{"id":"boas-pr-ticas","level":0,"title":"Boas Práticas","anchor":"#boas-pr-ticas"},{"id":"exemplos-pr-ticos","level":0,"title":"Exemplos Práticos","anchor":"#exemplos-pr-ticos"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Trabalhando com Arquivos em Ruby | Learn Ruby"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Learn Ruby Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/working-with-files.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Trabalhando com Arquivos em Ruby | Learn Ruby"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/working-with-files.html#webpage",
+    "url": "writerside-documentation/working-with-files.html",
+    "name": "Trabalhando com Arquivos em Ruby | Learn Ruby",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Ruby Help"
+}</script><!-- End Schema.org --></head><body data-id="working-with-files" data-main-title="Trabalhando com Arquivos em Ruby" data-article-props="{&quot;seeAlso&quot;:[{&quot;title&quot;:&quot;Miscellaneous&quot;,&quot;links&quot;:[{&quot;url&quot;:&quot;https://ruby-doc.org/core/File.html&quot;,&quot;text&quot;:&quot;Documentação de File&quot;},{&quot;url&quot;:&quot;https://ruby-doc.org/core/Dir.html&quot;,&quot;text&quot;:&quot;Documentação de Dir&quot;},{&quot;url&quot;:&quot;https://ruby-doc.org/stdlib/libdoc/fileutils/rdoc/FileUtils.html&quot;,&quot;text&quot;:&quot;Documentação de FileUtils&quot;}]}],&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="input-output.md|Entrada e Saída em Ruby"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Ruby  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="working-with-files" id="working-with-files.md">Trabalhando com Arquivos em Ruby</h1><section class="chapter"><h2 id="abrindo-e-fechando-arquivos" data-toc="abrindo-e-fechando-arquivos">Abrindo e Fechando Arquivos</h2><section class="chapter"><h3 id="m-todos-b-sicos" data-toc="m-todos-b-sicos">M&eacute;todos B&aacute;sicos</h3><div class="code-block" data-lang="ruby">
+# Abrindo um arquivo (modo leitura)
+arquivo = File.open('exemplo.txt', 'r')
+conteudo = arquivo.read
+arquivo.close
+
+# Usando bloco (fecha automaticamente)
+File.open('exemplo.txt', 'r') do |arquivo|
+  conteudo = arquivo.read
+end
+</div></section><section class="chapter"><h3 id="modos-de-abertura" data-toc="modos-de-abertura">Modos de Abertura</h3><div class="code-block" data-lang="ruby">
+# Modos comuns
+'r'  # Somente leitura
+'w'  # Escrita (cria novo/sobrescreve)
+'a'  # Anexar ao final
+'r+' # Leitura e escrita
+'w+' # Leitura e escrita (cria novo/sobrescreve)
+'a+' # Leitura e anexar
+
+# Exemplo com diferentes modos
+File.open('log.txt', 'a') do |arquivo|
+  arquivo.puts &quot;Nova entrada: #{Time.now}&quot;
+end
+</div></section></section><section class="chapter"><h2 id="leitura-de-arquivos" data-toc="leitura-de-arquivos">Leitura de Arquivos</h2><section class="chapter"><h3 id="lendo-conte-do" data-toc="lendo-conte-do">Lendo Conte&uacute;do</h3><div class="code-block" data-lang="ruby">
+# Lendo arquivo inteiro
+conteudo = File.read('arquivo.txt')
+
+# Lendo linhas em array
+linhas = File.readlines('arquivo.txt')
+
+# Lendo linha por linha
+File.foreach('arquivo.txt') do |linha|
+  puts linha
+end
+
+# Lendo com encoding específico
+conteudo = File.read('arquivo.txt', encoding: 'UTF-8')
+</div></section><section class="chapter"><h3 id="t-cnicas-de-leitura" data-toc="t-cnicas-de-leitura">T&eacute;cnicas de Leitura</h3><div class="code-block" data-lang="ruby">
+File.open('dados.txt', 'r') do |arquivo|
+  # Lê primeiros 10 bytes
+  dados = arquivo.read(10)
+  
+  # Lê próxima linha
+  linha = arquivo.gets
+  
+  # Lê até encontrar padrão
+  texto = arquivo.readline until texto =~ /fim/
+  
+  # Posicionamento no arquivo
+  arquivo.seek(20, IO::SEEK_SET)
+  arquivo.rewind  # Volta ao início
+end
+</div></section></section><section class="chapter"><h2 id="escrita-em-arquivos" data-toc="escrita-em-arquivos">Escrita em Arquivos</h2><section class="chapter"><h3 id="m-todos-de-escrita" data-toc="m-todos-de-escrita">M&eacute;todos de Escrita</h3><div class="code-block" data-lang="ruby">
+# Escrita simples
+File.write('saida.txt', 'Olá, Mundo!')
+
+# Anexando conteúdo
+File.write('log.txt', 'Nova entrada\n', mode: 'a')
+
+# Usando write e puts
+File.open('dados.txt', 'w') do |arquivo|
+  arquivo.write(&quot;Linha sem quebra&quot;)
+  arquivo.puts(&quot;Linha com quebra&quot;)
+  arquivo.printf(&quot;Formatado: %s\n&quot;, &quot;texto&quot;)
+end
+</div></section><section class="chapter"><h3 id="escrita-estruturada" data-toc="escrita-estruturada">Escrita Estruturada</h3><div class="code-block" data-lang="ruby">
+# Escrevendo dados estruturados
+dados = {nome: 'Ruby', versao: '3.2.0'}
+
+File.open('config.txt', 'w') do |arquivo|
+  dados.each do |chave, valor|
+    arquivo.puts &quot;#{chave}: #{valor}&quot;
+  end
+end
+</div></section></section><section class="chapter"><h2 id="manipula-o-de-arquivos" data-toc="manipula-o-de-arquivos">Manipula&ccedil;&atilde;o de Arquivos</h2><section class="chapter"><h3 id="opera-es-com-arquivos" data-toc="opera-es-com-arquivos">Opera&ccedil;&otilde;es com Arquivos</h3><div class="code-block" data-lang="ruby">
+# Verificações
+File.exist?('arquivo.txt')    # Existe?
+File.directory?('pasta')      # É diretório?
+File.file?('arquivo.txt')     # É arquivo?
+File.zero?('vazio.txt')       # Está vazio?
+
+# Informações
+File.size('arquivo.txt')      # Tamanho em bytes
+File.mtime('arquivo.txt')     # Data de modificação
+File.dirname('path/arquivo.txt')  # Diretório
+File.basename('path/arquivo.txt') # Nome do arquivo
+</div></section><section class="chapter"><h3 id="manipula-o-de-diret-rios" data-toc="manipula-o-de-diret-rios">Manipula&ccedil;&atilde;o de Diret&oacute;rios</h3><div class="code-block" data-lang="ruby">
+# Criando diretórios
+Dir.mkdir('nova_pasta')
+FileUtils.mkdir_p('path/to/nested/folder')
+
+# Listando arquivos
+Dir.entries('.')              # Lista tudo
+Dir['*.txt']                 # Com glob pattern
+Dir.glob('**/*.rb')          # Recursivo
+
+# Navegando em diretórios
+Dir.chdir('nova_pasta') do
+  # Trabalha no diretório
+end
+</div></section></section><section class="chapter"><h2 id="tratamento-de-erros" data-toc="tratamento-de-erros">Tratamento de Erros</h2><div class="code-block" data-lang="ruby">
+begin
+  arquivo = File.open('inexistente.txt')
+rescue Errno::ENOENT
+  puts &quot;Arquivo não encontrado!&quot;
+rescue Errno::EACCES
+  puts &quot;Permissão negada!&quot;
+ensure
+  arquivo&amp;.close
+end
+</div></section><section class="chapter"><h2 id="boas-pr-ticas" data-toc="boas-pr-ticas">Boas Pr&aacute;ticas</h2><div class="code-block" data-lang="ruby">
+# Use blocos para garantir fechamento
+def processar_arquivo(nome)
+  File.open(nome, 'r') do |arquivo|
+    yield arquivo
+  end
+end
+
+# Backup antes de modificar
+def atualizar_arquivo(nome)
+  FileUtils.cp(nome, &quot;#{nome}.bak&quot;)
+  File.write(nome, novo_conteudo)
+end
+
+# Validação de arquivo
+def arquivo_valido?(nome)
+  File.file?(nome) &amp;&amp; File.readable?(nome)
+end
+</div></section><section class="chapter"><h2 id="exemplos-pr-ticos" data-toc="exemplos-pr-ticos">Exemplos Pr&aacute;ticos</h2><div class="code-block" data-lang="ruby">
+# Logger simples
+class Logger
+  def initialize(arquivo)
+    @arquivo = arquivo
+  end
+
+  def log(mensagem)
+    File.open(@arquivo, 'a') do |f|
+      f.puts &quot;#{Time.now} - #{mensagem}&quot;
+    end
+  end
+end
+
+# Processador CSV
+def processar_csv(arquivo)
+  require 'csv'
+  
+  CSV.foreach(arquivo, headers: true) do |linha|
+    yield linha
+  end
+end
+
+# Leitor de configuração
+def ler_config(arquivo)
+  require 'yaml'
+  YAML.load_file(arquivo)
+end
+</div></section><div class="last-modified">14 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="basic-io.html" class="navigation-links__prev">Entrada e Sa&iacute;da B&aacute;sica em Ruby</a><a href="control-structures.html" class="navigation-links__next">Estruturas de Controle em Ruby</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

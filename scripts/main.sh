@@ -9,9 +9,6 @@
                                                                       
 echo "🔥 Iniciando sequência de deploy punk..."
 
-echo "💀 Destruindo docs antigos..."
-rm -rf ../docs/
-
 echo "📦 Descompactando novos arquivos..."
 ./unzip_writerside.sh
 

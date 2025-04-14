@@ -1,0 +1,139 @@
+<!DOCTYPE html SYSTEM "about:legacy-compat">
+<html lang="en-US" data-preset="contrast" data-primary-color="#E8488B"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta charset="UTF-8"><meta name="robots" content="noindex"><meta name="built-on" content="2025-04-14T14:58:10.609600502"><title>Strings em Ruby | Learn Ruby</title><script type="application/json" id="virtual-toc-data">[{"id":"cria-o-de-strings","level":0,"title":"Criação de Strings","anchor":"#cria-o-de-strings"},{"id":"interpola-o","level":0,"title":"Interpolação","anchor":"#interpola-o"},{"id":"m-todos-comuns","level":0,"title":"Métodos Comuns","anchor":"#m-todos-comuns"},{"id":"compara-o-de-strings","level":0,"title":"Comparação de Strings","anchor":"#compara-o-de-strings"},{"id":"codifica-o-e-encoding","level":0,"title":"Codificação e Encoding","anchor":"#codifica-o-e-encoding"},{"id":"exemplos-pr-ticos","level":0,"title":"Exemplos Práticos","anchor":"#exemplos-pr-ticos"},{"id":"performance-e-boas-pr-ticas","level":0,"title":"Performance e Boas Práticas","anchor":"#performance-e-boas-pr-ticas"}]</script><script type="application/json" id="topic-shortcuts"></script><link href="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.css" rel="stylesheet"><link rel="icon" type="image/svg" sizes="16x16" href="images/logo-primary.svg"><meta name="image" content=""><!-- Open Graph --><meta property="og:title" content="Strings em Ruby | Learn Ruby"><meta property="og:description" content=""><meta property="og:image" content=""><meta property="og:site_name" content="Learn Ruby Help"><meta property="og:type" content="website"><meta property="og:locale" content="en_US"><meta property="og:url" content="writerside-documentation/strings.html"><!-- End Open Graph --><!-- Twitter Card --><meta name="twitter:card" content="summary_large_image"><meta name="twitter:site" content=""><meta name="twitter:title" content="Strings em Ruby | Learn Ruby"><meta name="twitter:description" content=""><meta name="twitter:creator" content=""><meta name="twitter:image:src" content=""><!-- End Twitter Card --><!-- Schema.org WebPage --><script type="application/ld+json">{
+    "@context": "http://schema.org",
+    "@type": "WebPage",
+    "@id": "writerside-documentation/strings.html#webpage",
+    "url": "writerside-documentation/strings.html",
+    "name": "Strings em Ruby | Learn Ruby",
+    "description": "",
+    "image": "",
+    "inLanguage":"en-US"
+}</script><!-- End Schema.org --><!-- Schema.org WebSite --><script type="application/ld+json">{
+    "@type": "WebSite",
+    "@id": "writerside-documentation/#website",
+    "url": "writerside-documentation/",
+    "name": "Learn Ruby Help"
+}</script><!-- End Schema.org --></head><body data-id="strings" data-main-title="Strings em Ruby" data-article-props="{&quot;seeAlso&quot;:[{&quot;title&quot;:&quot;Miscellaneous&quot;,&quot;links&quot;:[{&quot;url&quot;:&quot;https://ruby-doc.org/core/String.html&quot;,&quot;text&quot;:&quot;Documentação Oficial de String&quot;},{&quot;url&quot;:&quot;https://rubyapi.org/3.2/o/string&quot;,&quot;text&quot;:&quot;Ruby 3.2 String API&quot;}]}],&quot;seeAlsoStyle&quot;:&quot;links&quot;}" data-template="article" data-breadcrumbs="data-types.md|Tipos de Dados em Ruby"><div class="wrapper"><main class="panel _main"><header class="panel__header"><div class="container"><h3>Learn Ruby  Help</h3><div class="panel-trigger"></div></div></header><section class="panel__content"><div class="container"><article class="article" data-shortcut-switcher="inactive"><h1 data-toc="strings" id="strings.md">Strings em Ruby</h1><p id="z4qt210_3">As strings em Ruby s&atilde;o objetos que representam sequ&ecirc;ncias de caracteres. S&atilde;o extremamente vers&aacute;teis e oferecem uma grande variedade de m&eacute;todos &uacute;teis.</p><section class="chapter"><h2 id="cria-o-de-strings" data-toc="cria-o-de-strings">Cria&ccedil;&atilde;o de Strings</h2><section class="chapter"><h3 id="formas-de-declara-o" data-toc="formas-de-declara-o">Formas de Declara&ccedil;&atilde;o</h3><div class="code-block" data-lang="ruby">
+# Aspas simples
+nome = 'Ruby'
+
+# Aspas duplas (permite interpolação)
+versao = &quot;3.2.0&quot;
+descricao = &quot;#{nome} versão #{versao}&quot;
+
+# Heredoc (para strings multilinhas)
+texto_longo = &lt;&lt;~TEXT
+  Esta é uma string multilinha.
+  Mantém a formatação
+  e permite #{interpolacao}.
+TEXT
+
+# Strings com caracteres especiais
+caminho = %q{C:\Users\Nome}  # Não interpreta caracteres especiais
+comando = %Q{ruby -v}        # Interpreta caracteres especiais
+</div></section></section><section class="chapter"><h2 id="interpola-o" data-toc="interpola-o">Interpola&ccedil;&atilde;o</h2><div class="code-block" data-lang="ruby">
+nome = &quot;Alice&quot;
+idade = 25
+
+# Interpolação básica
+mensagem = &quot;#{nome} tem #{idade} anos&quot;
+
+# Interpolação com expressões
+dobro_idade = &quot;#{nome} terá #{idade * 2} anos em 25 anos&quot;
+
+# Interpolação com métodos
+grito = &quot;#{nome.upcase} ESTÁ GRITANDO!&quot;
+</div></section><section class="chapter"><h2 id="m-todos-comuns" data-toc="m-todos-comuns">M&eacute;todos Comuns</h2><section class="chapter"><h3 id="transforma-o" data-toc="transforma-o">Transforma&ccedil;&atilde;o</h3><div class="code-block" data-lang="ruby">
+texto = &quot;ruby é incrível&quot;
+
+texto.upcase      # =&gt; &quot;RUBY É INCRÍVEL&quot;
+texto.downcase    # =&gt; &quot;ruby é incrível&quot;
+texto.capitalize  # =&gt; &quot;Ruby é incrível&quot;
+texto.swapcase    # =&gt; &quot;RUBY É INCRÍVEL&quot;
+texto.reverse     # =&gt; &quot;levírcni é ybur&quot;
+</div></section><section class="chapter"><h3 id="busca-e-substitui-o" data-toc="busca-e-substitui-o">Busca e Substitui&ccedil;&atilde;o</h3><div class="code-block" data-lang="ruby">
+frase = &quot;O Ruby é uma linguagem Ruby&quot;
+
+# Substituição
+frase.sub('Ruby', 'Python')     # =&gt; &quot;O Python é uma linguagem Ruby&quot;
+frase.gsub('Ruby', 'Python')    # =&gt; &quot;O Python é uma linguagem Python&quot;
+
+# Busca
+frase.include?('Ruby')          # =&gt; true
+frase.start_with?('O')         # =&gt; true
+frase.end_with?('Ruby')        # =&gt; true
+frase.index('Ruby')            # =&gt; 2
+</div></section><section class="chapter"><h3 id="manipula-o" data-toc="manipula-o">Manipula&ccedil;&atilde;o</h3><div class="code-block" data-lang="ruby">
+# Split e Join
+palavras = &quot;ruby,python,javascript&quot;.split(',')  # =&gt; [&quot;ruby&quot;, &quot;python&quot;, &quot;javascript&quot;]
+palavras.join(' e ')                           # =&gt; &quot;ruby e python e javascript&quot;
+
+# Strip (remove espaços em branco)
+&quot;  ruby  &quot;.strip      # =&gt; &quot;ruby&quot;
+&quot;  ruby  &quot;.lstrip     # =&gt; &quot;ruby  &quot;
+&quot;  ruby  &quot;.rstrip     # =&gt; &quot;  ruby&quot;
+
+# Padding
+&quot;ruby&quot;.ljust(10)      # =&gt; &quot;ruby      &quot;
+&quot;ruby&quot;.rjust(10)      # =&gt; &quot;      ruby&quot;
+&quot;ruby&quot;.center(10)     # =&gt; &quot;   ruby   &quot;
+</div></section></section><section class="chapter"><h2 id="compara-o-de-strings" data-toc="compara-o-de-strings">Compara&ccedil;&atilde;o de Strings</h2><div class="code-block" data-lang="ruby">
+# Comparação básica
+&quot;ruby&quot; == &quot;ruby&quot;      # =&gt; true
+&quot;ruby&quot; === &quot;ruby&quot;     # =&gt; true
+&quot;ruby&quot; &lt;=&gt; &quot;python&quot;   # =&gt; 1 (comparação lexicográfica)
+
+# Ignorando case
+&quot;Ruby&quot;.casecmp?(&quot;ruby&quot;)    # =&gt; true
+&quot;Ruby&quot;.downcase == &quot;ruby&quot;  # =&gt; true
+</div></section><section class="chapter"><h2 id="codifica-o-e-encoding" data-toc="codifica-o-e-encoding">Codifica&ccedil;&atilde;o e Encoding</h2><div class="code-block" data-lang="ruby">
+# Encoding
+texto = &quot;こんにちは&quot;
+texto.encoding        # =&gt; #&lt;Encoding:UTF-8&gt;
+texto.encode('EUC-JP')  # Converte para EUC-JP
+
+# Força encoding
+texto.force_encoding('UTF-8')
+</div></section><section class="chapter"><h2 id="exemplos-pr-ticos" data-toc="exemplos-pr-ticos">Exemplos Pr&aacute;ticos</h2><section class="chapter"><h3 id="manipula-o-de-texto" data-toc="manipula-o-de-texto">Manipula&ccedil;&atilde;o de Texto</h3><div class="code-block" data-lang="ruby">
+def formatar_nome(nome)
+  # Remove espaços extras e capitaliza cada palavra
+  nome.strip.split.map(&amp;:capitalize).join(' ')
+end
+
+puts formatar_nome(&quot; ada  lovelace &quot;)  # =&gt; &quot;Ada Lovelace&quot;
+
+def extrair_dominio(email)
+  email.split('@').last
+end
+
+puts extrair_dominio(&quot;usuario@exemplo.com&quot;)  # =&gt; &quot;exemplo.com&quot;
+</div></section><section class="chapter"><h3 id="valida-es-simples" data-toc="valida-es-simples">Valida&ccedil;&otilde;es Simples</h3><div class="code-block" data-lang="ruby">
+def email_valido?(email)
+  email.include?('@') &amp;&amp; 
+  email.include?('.') &amp;&amp; 
+  !email.start_with?('@') &amp;&amp; 
+  !email.end_with?('.')
+end
+
+puts email_valido?(&quot;user@domain.com&quot;)  # =&gt; true
+puts email_valido?(&quot;invalid.email&quot;)    # =&gt; false
+</div></section><section class="chapter"><h3 id="formata-o-de-texto" data-toc="formata-o-de-texto">Formata&ccedil;&atilde;o de Texto</h3><div class="code-block" data-lang="ruby">
+def formatar_cpf(cpf)
+  numeros = cpf.gsub(/\D/, '')  # Remove não-dígitos
+  &quot;#{numeros[0..2]}.#{numeros[3..5]}.#{numeros[6..8]}-#{numeros[9..10]}&quot;
+end
+
+puts formatar_cpf(&quot;12345678901&quot;)  # =&gt; &quot;123.456.789-01&quot;
+</div></section></section><section class="chapter"><h2 id="performance-e-boas-pr-ticas" data-toc="performance-e-boas-pr-ticas">Performance e Boas Pr&aacute;ticas</h2><div class="code-block" data-lang="ruby">
+# Uso eficiente de strings
+# Ruim
+string = &quot;&quot;
+10.times { string = string + &quot;a&quot; }
+
+# Bom
+string = &quot;&quot;
+10.times { string &lt;&lt; &quot;a&quot; }  # Mais eficiente
+
+# Freeze para strings imutáveis
+CONSTANT_STRING = &quot;não muda&quot;.freeze
+</div></section><div class="last-modified">14 abril 2025</div><div data-feedback-placeholder="true"></div><div class="navigation-links _bottom"><a href="data-types.html" class="navigation-links__prev">Tipos de Dados em Ruby</a><a href="numeric.html" class="navigation-links__next">Tipos Num&eacute;ricos em Ruby</a></div></article><div id="disqus_thread"></div></div></section></main></div><script src="https://resources.jetbrains.com/writerside/apidoc/6.22.0-b776/app.js"></script></body></html>

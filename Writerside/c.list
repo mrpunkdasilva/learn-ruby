@@ -3,4 +3,8 @@
         SYSTEM "https://resources.jetbrains.com/writerside/1.0/categories.dtd">
 <categories>
     <category id="wrs" name="Writerside documentation" order="1"/>
+    <category id="external" name="External Resources" order="2"/>
+    <category id="ruby" name="Ruby Documentation" order="3"/>
+    <category id="tutorials" name="Tutorials" order="4"/>
+    <category id="examples" name="Code Examples" order="5"/>
 </categories>

@@ -16,7 +16,7 @@ else
 end
 ```
 
-### Exemplos Práticos
+### Exemplos Práticos {id="exemplos-pr-ticos_1"}
 
 ```ruby
 def verificar_temperatura(temp)
@@ -35,7 +35,7 @@ puts "Está quente!" if temperatura > 30
 
 ## unless
 
-### Sintaxe Básica
+### Sintaxe Básica {id="sintaxe-b-sica_1"}
 
 ```ruby
 unless condicao
@@ -45,7 +45,7 @@ else
 end
 ```
 
-### Exemplos Práticos
+### Exemplos Práticos {id="exemplos-pr-ticos_3"}
 
 ```ruby
 def verificar_acesso(usuario)
@@ -62,7 +62,7 @@ exit unless File.exist?("config.yml")
 
 ## case/when
 
-### Sintaxe Básica
+### Sintaxe Básica {id="sintaxe-b-sica_2"}
 
 ```ruby
 case expressao
@@ -110,13 +110,13 @@ end
 
 ## Operador Ternário
 
-### Sintaxe Básica
+### Sintaxe Básica {id="sintaxe-b-sica_3"}
 
 ```ruby
 condicao ? valor_se_verdadeiro : valor_se_falso
 ```
 
-### Exemplos Práticos
+### Exemplos Práticos {id="exemplos-pr-ticos_2"}
 
 ```ruby
 def status_conta(saldo)

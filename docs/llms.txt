@@ -87,6 +87,8 @@ Prepare seu ambiente de desenvolvimento no [Primeiros Passos](first-steps.html).
 
 ## See also
 
+### External Resources
+
 [Quartel General do Ruby](https://www.ruby-lang.org)
 [Documentação para Netrunners](https://ruby-doc.org)
 
@@ -228,6 +230,8 @@ Agora que você tem seu ambiente configurado, é hora de:
 3. [Sintaxe Básica](basic-syntax.html) - As regras do jogo (que foram feitas para serem quebradas)
 
 ## See also
+
+### External Resources
 
 [RVM - Para os indecisivos que querem todas as versões](https://rvm.io)
 [Bundler - Seu gerenciador de dependências favorito](https://bundler.io)
@@ -403,6 +407,8 @@ Temas Recomendados:
 ```
 
 ## See also
+
+### External Resources
 
 [RVM - Guia Completo](https://rvm.io/rvm/install)
 [rbenv - Documentação](https://github.com/rbenv/rbenv#installation)
@@ -583,6 +589,8 @@ Após dominar estes conceitos básicos, você estará pronto para explorar:
 3. [Controle de Fluxo](control-structures.html) - Domine as estruturas de controle
 
 ## See also
+
+### External Resources
 
 [Documentação Oficial Ruby](https://ruby-doc.org)
 [Guia Rápido Ruby](https://www.ruby-lang.org/pt/documentation/quickstart)
@@ -865,6 +873,8 @@ puts formatar_nome("")              # => "Nome inválido"
 
 ## See also
 
+### External Resources
+
 [Guia de Estilo Ruby](https://ruby-style-guide.shopify.dev/)
 [Documentação Ruby](https://www.ruby-lang.org/pt/documentation/)
 
@@ -1075,6 +1085,8 @@ puts processar_dado([1, 2, 3])  # => "Array com 3 elementos"
 
 ## See also
 
+### External Resources
+
 [Documentação String](https://ruby-doc.org/core/String.html)
 [Documentação Array](https://ruby-doc.org/core/Array.html)
 [Documentação Hash](https://ruby-doc.org/core/Hash.html)
@@ -1260,6 +1272,8 @@ CONSTANT_STRING = "não muda".freeze
 
 ## See also
 
+### External Resources
+
 [Documentação Oficial de String](https://ruby-doc.org/core/String.html)
 [Ruby 3.2 String API](https://rubyapi.org/3.2/o/string)
 
@@ -1442,6 +1456,8 @@ valor = BigDecimal('10.99')
 ```
 
 ## See also
+
+### External Resources
 
 [Documentação de Integer](https://ruby-doc.org/core/Integer.html)
 [Documentação de Float](https://ruby-doc.org/core/Float.html)
@@ -1632,6 +1648,8 @@ impares = numeros.reject(&:even?)
 
 ## See also
 
+### External Resources
+
 [Documentação de Array](https://ruby-doc.org/core/Array.html)
 [Documentação de Hash](https://ruby-doc.org/core/Hash.html)
 
@@ -1803,6 +1821,8 @@ end
 
 ## See also
 
+### External Resources
+
 [Documentação de Range](https://ruby-doc.org/core/Range.html)
 
 
@@ -1913,6 +1933,8 @@ Explore os subtópicos para aprender mais sobre:
 * [Trabalhando com Arquivos](working-with-files.html)
 
 ## See also
+
+### External Resources
 
 [Documentação IO](https://ruby-doc.org/core/IO.html)
 [Documentação File](https://ruby-doc.org/core/File.html)
@@ -2108,6 +2130,8 @@ end
 ```
 
 ## See also
+
+### External Resources
 
 [Documentação de IO](https://ruby-doc.org/core/IO.html)
 [Documentação de Kernel](https://ruby-doc.org/core/Kernel.html)
@@ -2325,6 +2349,8 @@ end
 ```
 
 ## See also
+
+### External Resources
 
 [Documentação de File](https://ruby-doc.org/core/File.html)
 [Documentação de Dir](https://ruby-doc.org/core/Dir.html)
@@ -2590,6 +2616,8 @@ end
 
 ## See also
 
+### External Resources
+
 [Documentação de Estruturas de Controle](https://ruby-doc.org/core/doc/syntax/control_expressions_rdoc.html)
 [Documentação de Exceções](https://ruby-doc.org/core/doc/syntax/exceptions_rdoc.html)
 
@@ -2771,6 +2799,8 @@ end
 ```
 
 ## See also
+
+### External Resources
 
 [Documentação de Operadores](https://ruby-doc.org/core/doc/syntax/operators_rdoc.html)
 [Precedência de Operadores](https://ruby-doc.org/core/doc/syntax/precedence_rdoc.html)
@@ -3005,6 +3035,8 @@ end
 ```
 
 ## See also
+
+### External Resources
 
 [Documentação de Expressões de Controle](https://ruby-doc.org/core/doc/syntax/control_expressions_rdoc.html)
 [Documentação de Pattern Matching](https://ruby-doc.org/core/doc/syntax/pattern_matching_rdoc.html)
@@ -3255,6 +3287,8 @@ end
 
 ## See also
 
+### External Resources
+
 [Documentação do Enumerable](https://ruby-doc.org/core/Enumerable.html)
 [Documentação de Integer (para times, upto, etc)](https://ruby-doc.org/core/Integer.html)
 
@@ -3486,6 +3520,8 @@ end
 
 ## See also
 
+### External Resources
+
 [Documentação do Enumerable](https://ruby-doc.org/core/Enumerable.html)
 [Documentação de Proc](https://ruby-doc.org/core/Proc.html)
 
@@ -3680,6 +3716,8 @@ end
 ```
 
 ## See also
+
+### External Resources
 
 [Documentação de Proc](https://ruby-doc.org/core/Proc.html)
 [Documentação de block_given?](https://ruby-doc.org/core/Kernel.html#method-i-block_given-3F)
@@ -3886,6 +3924,8 @@ encontrado = numeros.find { |n| n > 5 }
 
 ## See also
 
+### External Resources
+
 [Documentação do Enumerable](https://ruby-doc.org/core/Enumerable.html)
 [Documentação de Array](https://ruby-doc.org/core/Array.html)
 
@@ -4054,6 +4094,8 @@ end
 ```
 
 ## See also
+
+### External Resources
 
 [Documentação de Enumerator](https://ruby-doc.org/core/Enumerator.html)
 [Documentação de Enumerator::Lazy](https://ruby-doc.org/core/Enumerator/Lazy.html)
@@ -4252,6 +4294,8 @@ end
 ```
 
 ## See also
+
+### External Resources
 
 [Documentação de Proc](https://ruby-doc.org/core/Proc.html)
 [Documentação de Method](https://ruby-doc.org/core/Method.html)
@@ -4543,6 +4587,8 @@ end
 
 ## See also
 
+### External Resources
+
 [Documentação de Object](https://ruby-doc.org/core/Object.html)
 [Documentação de Module](https://ruby-doc.org/core/Module.html)
 [Documentação de Class](https://ruby-doc.org/core/Class.html)
@@ -4815,6 +4861,8 @@ end
 ```
 
 ## See also
+
+### External Resources
 
 [Documentação de Class](https://ruby-doc.org/core/Class.html)
 [Documentação de Object](https://ruby-doc.org/core/Object.html)
@@ -5127,6 +5175,8 @@ end
 
 ## See also
 
+### External Resources
+
 [Documentação de Class#superclass](https://ruby-doc.org/core/Class.html#method-i-superclass)
 [Documentação de Module#ancestors](https://ruby-doc.org/core/Module.html#method-i-ancestors)
 
@@ -5417,6 +5467,8 @@ end
 
 ## See also
 
+### External Resources
+
 [Documentação de visibilidade de métodos](https://ruby-doc.org/core/Module.html#method-i-private)
 [Documentação de attr_accessor](https://ruby-doc.org/core/Module.html#method-i-attr_accessor)
 
@@ -5694,6 +5746,8 @@ end
 ```
 
 ## See also
+
+### External Resources
 
 [Documentação de Modules](https://ruby-doc.org/core/Module.html)
 [Documentação de Object](https://ruby-doc.org/core/Object.html)

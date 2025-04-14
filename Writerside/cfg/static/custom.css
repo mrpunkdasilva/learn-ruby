@@ -1,12 +1,3 @@
-/* Cores personalizadas */
-:root {
-    --primary-color: #E8488B;
-    --secondary-color: #2A0C12;
-    --accent-color: #FF9ECD;
-    --code-bg: #2B2B2B;
-    --link-color: #E8488B;
-}
-
 p {
     text-align: justify;
 }

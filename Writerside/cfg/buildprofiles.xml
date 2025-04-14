@@ -7,11 +7,22 @@
      <variables>
         <header-logo>logo-primary.svg</header-logo>
         <custom-favicons>logo-primary.svg</custom-favicons>
+        <product-web-url>https://punkdomus.dev/ruby</product-web-url>
+        <download-title>Baixar PDF</download-title>
+        <download-page>https://punkdomus.dev/ruby/download</download-page>
+        <showDownloadButton>true</showDownloadButton>
     </variables>
     <build-profile instance="lr">
         <variables>
             <noindex-content>true</noindex-content>
             <primary-color>strawberry</primary-color>
+            <custom-css>custom.css</custom-css>
+            <analytics-head-script-file>analytics.js</analytics-head-script-file>
+            <feedback-widget>true</feedback-widget>
+            <feedback-url>https://github.com/mrpunkdasilva/learn-ruby/issues/new</feedback-url>
+            <algolia-id>YOUR_ALGOLIA_ID</algolia-id>
+            <algolia-index>learn-ruby</algolia-index>
+            <algolia-api-key>YOUR_ALGOLIA_API_KEY</algolia-api-key>
         </variables>
     </build-profile>
 
@@ -21,5 +32,7 @@
 
      <footer>
         <copyright>PunkDomus 2025</copyright>
+        <link href="https://twitter.com/punkdomus">Twitter</link>
+        <link href="https://github.com/punkdomus">GitHub</link>
     </footer>
 </buildprofiles>
